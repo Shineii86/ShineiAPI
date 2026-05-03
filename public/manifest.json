@@ -1,0 +1,78 @@
+{
+  "name": "ShineiAPI",
+  "short_name": "ShineiAPI",
+  "description": "Free manga, manhwa, and webtoon REST API — no authentication required",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f0e8",
+  "theme_color": "#1a1a1a",
+  "categories": ["developer", "utilities", "books"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/landing-page.jpg",
+      "sizes": "1920x8827",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "ShineiAPI Landing Page"
+    },
+    {
+      "src": "/screenshots/api-docs.png",
+      "sizes": "1920x1581",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "API Documentation"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "API Documentation",
+      "short_name": "Docs",
+      "url": "/docs",
+      "description": "View the full API documentation"
+    },
+    {
+      "name": "API Health",
+      "short_name": "Health",
+      "url": "/api/v1/health",
+      "description": "Check API health status"
+    },
+    {
+      "name": "Random Series",
+      "short_name": "Random",
+      "url": "/api/v1/random",
+      "description": "Get a random manga series"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

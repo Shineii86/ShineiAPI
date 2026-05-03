@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#f5f0e8"/>
+  <rect x="6" y="6" width="1188" height="618" fill="none" stroke="#1a1a1a" stroke-width="8"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="12" fill="#1a1a1a"/>
+
+  <!-- Corner accents -->
+  <rect x="24" y="24" width="32" height="32" fill="#ffcc00" stroke="#1a1a1a" stroke-width="4"/>
+  <rect x="1144" y="24" width="32" height="32" fill="#e63b2e" stroke="#1a1a1a" stroke-width="4"/>
+
+  <!-- Star icon -->
+  <g transform="translate(120, 180)">
+    <polygon points="0,-60 13,-18 57,-18 21,7 34,50 0,24 -34,50 -21,7 -57,-18 -13,-18" fill="#ffcc00" stroke="#1a1a1a" stroke-width="5" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="200" y="200" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="110" font-weight="900" fill="#1a1a1a" letter-spacing="-4">ShineiAPI</text>
+
+  <!-- Version badge -->
+  <rect x="200" y="225" width="90" height="32" fill="#ffcc00" stroke="#1a1a1a" stroke-width="3"/>
+  <text x="245" y="247" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">v2.0.1</text>
+
+  <!-- Tagline -->
+  <text x="200" y="300" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="28" font-weight="700" fill="#1a1a1a" letter-spacing="4">FREE MANGA &amp; MANHWA REST API</text>
+
+  <!-- Accent line -->
+  <rect x="200" y="320" width="400" height="5" fill="#e63b2e" stroke="#1a1a1a" stroke-width="1.5"/>
+
+  <!-- Feature pills -->
+  <g transform="translate(200, 360)">
+    <rect x="0" y="0" width="160" height="40" fill="#1a1a1a"/>
+    <text x="80" y="27" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffcc00" text-anchor="middle">NO AUTH NEEDED</text>
+  </g>
+  <g transform="translate(375, 360)">
+    <rect x="0" y="0" width="130" height="40" fill="#e63b2e"/>
+    <text x="65" y="27" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">60 REQ/MIN</text>
+  </g>
+  <g transform="translate(520, 360)">
+    <rect x="0" y="0" width="120" height="40" fill="#0055ff"/>
+    <text x="60" y="27" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">CORS READY</text>
+  </g>
+
+  <!-- Right side decorative -->
+  <g transform="translate(750, 100)">
+    <rect x="0" y="0" width="400" height="430" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="4"/>
+    <!-- Window bar -->
+    <rect x="0" y="0" width="400" height="36" fill="#2a2a2a"/>
+    <circle cx="20" cy="18" r="5" fill="#e63b2e"/>
+    <circle cx="38" cy="18" r="5" fill="#ffcc00"/>
+    <circle cx="56" cy="18" r="5" fill="#34d399"/>
+    <text x="200" y="23" font-family="'JetBrains Mono', monospace" font-size="11" fill="#6b7280" text-anchor="middle">terminal — bash</text>
+
+    <!-- Code content -->
+    <text x="16" y="66" font-family="'JetBrains Mono', monospace" font-size="13" fill="#34d399">$</text>
+    <text x="30" y="66" font-family="'JetBrains Mono', monospace" font-size="13" fill="#f5f0e8">curl shineiapi.vercel.app/api/v1/search?q=solo</text>
+
+    <text x="16" y="100" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6b7280">{</text>
+    <text x="28" y="120" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34d399">"success"</text><text x="100" y="120" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">: </text><text x="112" y="120" font-family="'JetBrains Mono', monospace" font-size="12" fill="#e63b2e">true</text><text x="143" y="120" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">,</text>
+    <text x="28" y="140" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34d399">"data"</text><text x="80" y="140" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">: [{</text>
+    <text x="40" y="160" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34d399">"title"</text><text x="100" y="160" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">: </text><text x="112" y="160" font-family="'JetBrains Mono', monospace" font-size="12" fill="#ffcc00">"Solo Leveling"</text><text x="252" y="160" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">,</text>
+    <text x="40" y="180" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34d399">"rating"</text><text x="110" y="180" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">: </text><text x="122" y="180" font-family="'JetBrains Mono', monospace" font-size="12" fill="#60a5fa">9.8</text><text x="146" y="180" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">,</text>
+    <text x="40" y="200" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34d399">"chapters"</text><text x="130" y="200" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">: </text><text x="142" y="200" font-family="'JetBrains Mono', monospace" font-size="12" fill="#60a5fa">201</text>
+    <text x="28" y="220" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f5f0e8">}]</text>
+    <text x="16" y="240" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6b7280">}</text>
+
+    <!-- Status badge -->
+    <rect x="290" y="42" width="80" height="22" fill="#34d399"/>
+    <text x="330" y="58" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#1a1a1a" text-anchor="middle">200 OK</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="618" width="1200" height="12" fill="#1a1a1a"/>
+
+  <!-- Bottom URL -->
+  <text x="600" y="590" font-family="'JetBrains Mono', monospace" font-size="16" fill="#94a3b8" text-anchor="middle">shineiapi.vercel.app</text>
+
+  <!-- Bottom left decorative -->
+  <rect x="24" y="580" width="200" height="4" fill="#ffcc00" stroke="#1a1a1a" stroke-width="1"/>
+</svg>

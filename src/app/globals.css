@@ -1,0 +1,401 @@
+/*
+ * ╔══════════════════════════════════════════════════════╗
+ * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  Design System — Neo-Brutalist × Apple Polish       ║
+ * ║  github.com/Shineii86/ShineiAPI                      ║
+ * ╚══════════════════════════════════════════════════════╝
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════
+   Design Tokens — Warm Light Theme
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg: #f5f0e8;
+  --bg-dim: #ece8e0;
+  --bg-bright: #faf7f2;
+  --primary: 26 26 26;
+  --secondary: 230 59 46;
+  --tertiary: 0 85 255;
+  --accent: 255 204 0;
+  --text: #1a1a1a;
+  --text-muted: #6b6560;
+  --text-dim: #9a9590;
+  --green: 34 197 94;
+  --yellow: 255 204 0;
+  --red: 230 59 46;
+  --blue: 0 85 255;
+  --container: 1152px;
+  --container-width: 1152px;
+
+  /* Apple-style shadow tokens */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.06);
+  --shadow-xl: 0 8px 24px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.06);
+
+  color-scheme: light;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Base Reset
+   ═══════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgb(var(--accent));
+  color: rgb(var(--primary));
+}
+
+/* ═══════════════════════════════════════════════════════
+   Scrollbar — Refined
+   ═══════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+* { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent; }
+
+/* ═══════════════════════════════════════════════════════
+   Focus States — Apple ring
+   ═══════════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 3px solid rgb(var(--tertiary) / 0.5);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Typography — SF Pro inspired
+   ═══════════════════════════════════════════════════════ */
+.font-display {
+  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono), 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Components — Brutal × Apple Hybrid
+   ═══════════════════════════════════════════════════════ */
+@layer components {
+  /* ── Buttons ── */
+  .btn-brutal {
+    @apply inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm uppercase tracking-wider;
+    @apply bg-primary text-white border-2 border-primary;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .btn-brutal:hover {
+    @apply bg-accent text-primary;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  .btn-brutal:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-brutal-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm uppercase tracking-wider;
+    @apply bg-surface text-primary border-2 border-primary;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .btn-brutal-outline:hover {
+    @apply bg-accent;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .btn-brutal-outline:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ── Card — Frosted glass hybrid ── */
+  .card-brutal {
+    @apply bg-surface-bright p-6;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card-brutal:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: rgba(0,0,0,0.12);
+  }
+
+  /* ── Code Block — Terminal Style ── */
+  .code-brutal {
+    @apply bg-primary text-green-400 font-mono text-sm;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+  }
+  .code-brutal-header {
+    @apply flex items-center justify-between px-4 py-2;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.03);
+  }
+  .code-brutal pre {
+    @apply p-4 overflow-x-auto leading-relaxed;
+  }
+
+  /* ── Method Badge ── */
+  .method-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 text-[11px] font-mono font-bold uppercase tracking-wider;
+    border-radius: 8px;
+    border: 1.5px solid currentColor;
+  }
+  .method-get {
+    @apply method-badge bg-green-400/20 text-green-700;
+  }
+  .method-post {
+    @apply method-badge bg-yellow-400/20 text-yellow-700;
+  }
+
+  /* ── Section divider ── */
+  .section-divider {
+    @apply border-y;
+    border-color: rgba(0,0,0,0.06);
+  }
+
+  /* ── Sidebar link ── */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2 text-sm text-gray-500;
+    border-radius: 10px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+  .sidebar-link:hover {
+    @apply text-primary;
+    background-color: rgba(0,0,0,0.04);
+  }
+  .sidebar-link.active {
+    @apply text-primary font-semibold;
+    border-left-color: rgb(var(--accent));
+    background-color: color-mix(in srgb, rgb(var(--accent)) 15%, transparent);
+  }
+
+  /* ── API Table ── */
+  .api-table {
+    @apply w-full;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .api-table thead th {
+    @apply bg-primary text-white px-4 py-3 text-left text-xs font-bold uppercase tracking-wider;
+  }
+  .api-table tbody td {
+    @apply px-4 py-3 text-sm;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .api-table tbody tr {
+    transition: background-color 0.15s ease;
+  }
+  .api-table tbody tr:hover {
+    background-color: rgba(0,0,0,0.02);
+  }
+  .api-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ── Info Card ── */
+  .info-brutal {
+    @apply bg-surface-bright p-5;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-left: 4px solid rgb(var(--primary));
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .info-brutal-warning {
+    @apply info-brutal;
+    border-left-color: #facc15;
+  }
+  .info-brutal-success {
+    @apply info-brutal;
+    border-left-color: #4ade80;
+  }
+  .info-brutal-info {
+    @apply info-brutal;
+    border-left-color: rgb(var(--tertiary));
+  }
+
+  /* ── Frosted Nav ── */
+  .nav-frosted {
+    background: rgba(245, 240, 232, 0.78);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-frosted-solid {
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ── Pill Tag ── */
+  .pill-tag {
+    @apply inline-flex items-center px-3 py-1 text-xs font-bold uppercase tracking-wider;
+    border-radius: 99px;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Syntax Tokens
+   ═══════════════════════════════════════════════════════ */
+.t-key  { color: #c084fc; font-weight: 600; }
+.t-str  { color: #34d399; }
+.t-num  { color: #fbbf24; }
+.t-bool { color: #60a5fa; }
+.t-null { color: #94a3b8; font-style: italic; }
+.t-cmt  { color: #64748b; font-style: italic; }
+.t-op   { color: #f472b6; }
+.t-brk  { color: #94a3b8; }
+.t-fn   { color: #60a5fa; }
+.t-kw   { color: #c084fc; }
+.t-var  { color: #e2e8f0; }
+
+/* ═══════════════════════════════════════════════════════
+   Reveal Animations — Spring easing
+   ═══════════════════════════════════════════════════════ */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-left {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.reveal {
+  opacity: 0;
+  animation: reveal-up 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.reveal-left {
+  opacity: 0;
+  animation: reveal-left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.d1 { animation-delay: 0.06s; }
+.d2 { animation-delay: 0.12s; }
+.d3 { animation-delay: 0.18s; }
+.d4 { animation-delay: 0.24s; }
+.d5 { animation-delay: 0.30s; }
+
+/* ═══════════════════════════════════════════════════════
+   Reduced Motion
+   ═══════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Mobile & Responsive Utilities
+   ═══════════════════════════════════════════════════════ */
+
+/* Safe area insets for notched phones */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Minimum touch target size (44x44 WCAG) */
+button, a, [role="button"], select, input[type="checkbox"], input[type="radio"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Allow smaller interactive elements that are clearly labeled */
+.btn-brutal, .btn-brutal-outline, .method-badge, .sidebar-link, .pill-tag {
+  min-height: auto;
+  min-width: auto;
+}
+
+/* Code blocks — prevent horizontal overflow on mobile */
+pre, code {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+pre {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Tables — horizontal scroll on small screens */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* Mobile typography scaling */
+@media (max-width: 640px) {
+  h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
+
+  section { padding-left: 1rem; padding-right: 1rem; }
+
+  .code-brutal pre { padding: 1rem; font-size: 12px; }
+  .code-brutal-header { padding: 0.5rem 1rem; }
+
+  .playground-url-bar { flex-direction: column; }
+  .playground-url-bar input { border-left: none; }
+  .playground-url-bar button { border-l-4: none; border-t-4: 4px solid rgb(var(--primary)); }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .code-brutal pre { font-size: 12px; }
+}
+
+/* Prevent zoom on iOS inputs */
+@media (max-width: 1024px) {
+  input, select, textarea {
+    font-size: max(16px, 1em);
+  }
+}

@@ -1,0 +1,18 @@
+/* TEAM */
+Developer: Shinei Nouzen
+GitHub: https://github.com/Shineii86
+Role: Creator & Maintainer
+
+/* SITE */
+Last update: 2026/05/03
+Language: English
+IDE: VS Code
+Framework: Next.js
+Hosting: Vercel
+Standards: HTML5, CSS3, ES2022
+Components: React, Tailwind CSS
+
+/* SOURCE */
+Repository: https://github.com/Shineii86/ShineiAPI
+License: MIT
+API Data: Toraka (https://toraka.com)

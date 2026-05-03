@@ -1,0 +1,645 @@
+openapi: 3.1.0
+info:
+  title: ShineiAPI
+  version: 2.0.1
+  description: |
+    A free, open-source REST API for manga, manhwa, and webtoon data.
+    Built on the Toraka API with caching, rate limiting, and data normalization.
+
+    **No authentication required.** Rate limited to 60 requests per minute per IP.
+  contact:
+    name: Shineii86
+    url: https://github.com/Shineii86/ShineiAPI
+  license:
+    name: MIT
+    url: https://github.com/Shineii86/ShineiAPI/blob/main/LICENSE
+
+servers:
+  - url: https://shineiapi.vercel.app/api/v1
+    description: Production
+  - url: http://localhost:3000/api/v1
+    description: Local development
+
+tags:
+  - name: Series
+    description: Browse and retrieve series data
+  - name: Search
+    description: Search for series
+  - name: Discovery
+    description: Discover new content (random, popular, top rated)
+  - name: Reference
+    description: Static reference data (genres, schedule)
+  - name: System
+    description: Health and status endpoints
+
+paths:
+  /series:
+    get:
+      tags: [Series]
+      summary: Browse all series
+      description: Browse all series with filtering, sorting, and pagination.
+      operationId: browseSeries
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          description: Page number
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [popularity_rank, trending_rank, rating, updated_at, created_at]
+            default: popularity_rank
+          description: Sort field
+        - name: genre
+          in: query
+          schema:
+            type: string
+          description: Genre slug to filter by (e.g., "action", "fantasy")
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: Search string to filter results
+      responses:
+        '200':
+          description: Paginated list of series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSeriesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /series/{slug}:
+    get:
+      tags: [Series]
+      summary: Get series details
+      description: |
+        Returns complete information for a single series.
+        Pass `include=chapters` to embed the full chapter list.
+      operationId: getSeries
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+          description: URL-friendly series identifier
+          example: solo-leveling
+        - name: include
+          in: query
+          schema:
+            type: string
+          description: "Comma-separated includes. Use 'chapters' to embed chapters."
+      responses:
+        '200':
+          description: Series details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /series/{slug}/chapters:
+    get:
+      tags: [Series]
+      summary: Get chapter list
+      description: Returns all chapters for a series with metadata.
+      operationId: getChapters
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Series slug identifier
+      responses:
+        '200':
+          description: Chapter list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChaptersResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /search:
+    get:
+      tags: [Search]
+      summary: Search for series
+      description: |
+        Full-text search with optional filters.
+        Fully backward compatible — only `q` is required.
+      operationId: searchSeries
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+          description: Search query (minimum 2 characters)
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: Page number
+        - name: genre
+          in: query
+          schema:
+            type: string
+          description: Genre slug filter
+        - name: source
+          in: query
+          schema:
+            type: string
+          description: Source name filter
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: Content type (manhwa, manga, etc.)
+        - name: status
+          in: query
+          schema:
+            type: string
+          description: Release status (releasing, completed, etc.)
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSeriesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /popular:
+    get:
+      tags: [Discovery]
+      summary: Popular and trending series
+      description: Get popular or trending series.
+      operationId: getPopular
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: Page number
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [popular, trending]
+            default: popular
+          description: "popular or trending"
+      responses:
+        '200':
+          description: Popular/trending series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSeriesResponse'
+
+  /random:
+    get:
+      tags: [Discovery]
+      summary: Random series
+      description: Returns a random series from a curated list of popular titles.
+      operationId: getRandom
+      responses:
+        '200':
+          description: Random series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesResponse'
+
+  /top:
+    get:
+      tags: [Discovery]
+      summary: Top rated series
+      description: Returns the highest-rated series sorted by rating.
+      operationId: getTop
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 20
+          description: Number of results
+      responses:
+        '200':
+          description: Top rated series
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SeriesResponse'
+
+  /schedule:
+    get:
+      tags: [Reference]
+      summary: Release schedule
+      description: Returns release schedule, optionally filtered by day.
+      operationId: getSchedule
+      parameters:
+        - name: day
+          in: query
+          schema:
+            type: string
+            enum: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+          description: Day of the week
+      responses:
+        '200':
+          description: Release schedule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /genres:
+    get:
+      tags: [Reference]
+      summary: List all genres
+      description: Returns all supported genres with names, slugs, and descriptions.
+      operationId: getGenres
+      responses:
+        '200':
+          description: Genre list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Genre'
+
+  /health:
+    get:
+      tags: [System]
+      summary: Health check
+      description: Returns API health status, upstream connectivity, and cache stats.
+      operationId: getHealth
+      responses:
+        '200':
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: Degraded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+    head:
+      tags: [System]
+      summary: Health check (HEAD)
+      description: Quick health check with no response body. Useful for load balancer probes.
+      operationId: getHealthHead
+      responses:
+        '200':
+          description: Healthy
+        '503':
+          description: Degraded or upstream down
+
+  /stats:
+    get:
+      tags: [System]
+      summary: API statistics
+      description: Returns public API statistics including uptime, cache performance, and rate limit config.
+      operationId: getStats
+      responses:
+        '200':
+          description: API statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatsResponse'
+
+components:
+  schemas:
+    Genre:
+      type: object
+      properties:
+        slug:
+          type: string
+          example: action
+        name:
+          type: string
+          example: Action
+        description:
+          type: string
+          nullable: true
+          example: High-energy stories featuring physical feats and combat.
+
+    Series:
+      type: object
+      properties:
+        id:
+          type: string
+          description: UUID identifier
+        title:
+          type: string
+        slug:
+          type: string
+        synopsis:
+          type: string
+        alt_titles:
+          type: array
+          items:
+            type: string
+        authors:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              slug:
+                type: string
+        artists:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              slug:
+                type: string
+        genres:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              slug:
+                type: string
+        type:
+          type: string
+          description: Content type (e.g., "Manhwa", "Manga")
+        status:
+          type: string
+          description: Release status (e.g., "Releasing", "Completed")
+        rating:
+          type: number
+        chapters_count:
+          type: integer
+        bookmarks_count:
+          type: integer
+        rating_count:
+          type: integer
+        popularity_rank:
+          type: integer
+        score_ranking:
+          type: integer
+        cover:
+          type: object
+          nullable: true
+          properties:
+            small:
+              type: string
+            large:
+              type: string
+        banner:
+          type: string
+          nullable: true
+        official_sources:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              url:
+                type: string
+              language:
+                type: string
+                nullable: true
+              type:
+                type: string
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: UUID identifier
+        order:
+          type: integer
+        title:
+          type: string
+        source:
+          type: string
+          description: Source name (e.g., "KakaoPage")
+        published_at:
+          type: string
+          format: date-time
+
+    Pagination:
+      type: object
+      properties:
+        last_visible_page:
+          type: integer
+        has_next_page:
+          type: boolean
+        current_page:
+          type: integer
+        items:
+          type: object
+          properties:
+            count:
+              type: integer
+            total:
+              type: integer
+            per_page:
+              type: integer
+
+    SuccessEnvelope:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        timestamp:
+          type: string
+          format: date-time
+
+    ErrorEnvelope:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            status:
+              type: integer
+            retry_after:
+              type: integer
+              nullable: true
+              description: Seconds until rate limit resets (only on 429)
+        timestamp:
+          type: string
+          format: date-time
+
+    SeriesResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Series'
+
+    PaginatedSeriesResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Series'
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+
+    ChaptersResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Chapter'
+
+    ScheduleResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              type: object
+
+    HealthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            status:
+              type: string
+              enum: [healthy, degraded, down]
+            version:
+              type: string
+            uptime:
+              type: object
+              properties:
+                ms:
+                  type: integer
+                human:
+                  type: string
+            checks:
+              type: object
+              properties:
+                api:
+                  type: string
+                upstream:
+                  type: string
+                cache:
+                  type: string
+            timestamp:
+              type: string
+              format: date-time
+
+    StatsResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessEnvelope'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                name:
+                  type: string
+                version:
+                  type: string
+                description:
+                  type: string
+                uptime:
+                  type: object
+                  properties:
+                    ms:
+                      type: integer
+                    human:
+                      type: string
+                cache:
+                  type: object
+                endpoints:
+                  type: integer
+                rate_limit:
+                  type: object
+                  properties:
+                    max_requests:
+                      type: integer
+                    window:
+                      type: string
+                    scope:
+                      type: string
+                data_source:
+                  type: string
+                documentation:
+                  type: string
+                  format: uri
+                repository:
+                  type: string
+                  format: uri
+                license:
+                  type: string
+
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+  securitySchemes: {}

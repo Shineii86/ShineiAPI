@@ -1,0 +1,14 @@
+# ShineiAPI — Robots.txt
+# https://shineiapi.vercel.app
+
+User-agent: *
+Allow: /
+Allow: /docs
+Allow: /api/v1/health
+Allow: /api/v1/stats
+
+# Disallow API endpoints from crawling (they're for programmatic use, not indexing)
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://shineiapi.vercel.app/sitemap.xml
