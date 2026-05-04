@@ -216,7 +216,7 @@ export default function DocsLayout({ children }) {
                 <Link href="/" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">Home</Link>
               </div>
               <p className="text-sm text-white/40">
-                Built by <a href="https://github.com/Shineii86" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-bold">Shinei Nouzen</a>
+                Built with <span className="heartbeat">❤</span> by <a href="https://github.com/Shineii86" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-bold">Shinei Nouzen</a>
               </p>
             </div>
             <div className="mt-10 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>

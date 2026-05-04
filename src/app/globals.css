@@ -309,6 +309,18 @@ code, pre, .font-mono {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-6px); }
 }
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.25); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.25); }
+  70%      { transform: scale(1); }
+}
+.heartbeat {
+  display: inline-block;
+  animation: heartbeat 1.8s ease-in-out infinite;
+  color: #ef4444;
+}
 
 .reveal {
   opacity: 0;
