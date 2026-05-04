@@ -5,6 +5,29 @@ All notable changes to ShineiAPI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-05-04
+
+### 🎨 Frontend Fixes
+
+- **Logo font: Noto Serif JP** — The "水" kanji in the logo was falling back to inconsistent system fonts because Space Grotesk is Latin-only. Added Noto Serif JP via Google Fonts CSS with weights 200–900. Applied to all 6 logo instances across LandingNav, LegalLayout, docs layout, and HomeContent footer.
+- **Google Fonts: full CSS link** — Loaded Acme, Lora, Noto Serif JP, and Playfair Display in a single optimized `<link>` tag with `preconnect` for fast font delivery.
+- **Heart icon: SVG replaced emoji** — Footer credit "Built with ❤" used a plain emoji. Replaced with a proper `IconHeart` SVG component (filled heart, Lucide-style) and a `heartbeat` CSS animation that pulses with a realistic double-beat rhythm.
+- **Redundant /docs links removed** — Landing page had 7 links pointing to `/docs` (nav Docs, nav Get Started ×2, hero CTA, recipe "See full docs", footer Documentation, bottom CTA). Removed 3 redundant ones (Get Started desktop/mobile, "See full docs"). Final count: 4 (nav, hero, bottom CTA).
+- **Docs page self-reference fixed** — Docs nav and footer both linked to `/docs` while already on the docs page. Renamed to "API Reference" for clarity.
+- **Footer self-links removed** — Landing, legal, and docs footers all had redundant Documentation/API Reference links already covered by nav or hero CTAs. Cleaned up across all 3 layouts.
+
+### 📝 Files Modified
+
+- `src/app/layout.js` — Google Fonts CSS link with preconnect
+- `src/app/globals.css` — Heartbeat keyframe animation
+- `src/app/HomeContent.js` — Logo font, SVG heart, removed duplicate CTAs and footer link
+- `src/app/docs/layout.js` — Logo font, SVG heart, "API Reference" rename, removed footer self-link
+- `src/components/LandingNav.js` — Logo font, removed "Get Started" buttons
+- `src/components/LegalLayout.js` — Logo font, SVG heart, removed footer Documentation link
+- `src/components/icons.js` — New `IconHeart` component
+
+---
+
 ## [2.0.1] - 2026-05-03
 
 ### 🐛 Bug Fixes
