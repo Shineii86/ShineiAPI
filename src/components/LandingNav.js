@@ -25,7 +25,7 @@ export default function LandingNav() {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'nav-frosted-solid' : 'nav-frosted'}`}>
       <div className="max-w-containerWidth mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: 'var(--font-jp), "Hiragino Sans", "Noto Sans CJK JP", sans-serif' }}>
+          <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: '"Noto Serif JP", serif' }}>
             水
           </div>
           <span className="text-lg font-bold font-display uppercase tracking-tight">ShineiAPI</span>

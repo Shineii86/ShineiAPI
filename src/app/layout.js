@@ -7,7 +7,7 @@
  */
 
 import './globals.css';
-import { Space_Grotesk, Inter, JetBrains_Mono, Noto_Sans_JP } from 'next/font/google';
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import BackToTop from '@/components/BackToTop';
 import ScrollProgress from '@/components/ScrollProgress';
 
@@ -29,13 +29,6 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-mono',
-  display: 'swap',
-});
-
-const notoSansJP = Noto_Sans_JP({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-jp',
   display: 'swap',
 });
 
@@ -102,12 +95,15 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansJP.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>
         <link rel="canonical" href="https://shineiapi.vercel.app" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -15,7 +15,7 @@ import {
   IconCalendar, IconTag, IconClock, IconDatabase,
   IconAlertTriangle, IconHelpCircle, IconGlobe, IconFileText,
   IconArrowRight, IconGithub, IconStarFilled, IconMenu, IconX,
-  IconCode,
+  IconCode, IconHeart,
 } from '@/components/icons';
 import DocsSearch from '@/components/DocsSearch';
 
@@ -92,7 +92,7 @@ export default function DocsLayout({ children }) {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'nav-frosted-solid' : 'nav-frosted'}`}>
         <div className="max-w-containerWidth mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: 'var(--font-jp), "Hiragino Sans", "Noto Sans CJK JP", sans-serif' }}>
+            <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: '"Noto Serif JP", serif' }}>
               水
             </div>
             <span className="text-lg font-bold font-display uppercase tracking-tight">ShineiAPI</span>
@@ -204,7 +204,7 @@ export default function DocsLayout({ children }) {
           <footer className="py-12 sm:py-16 px-4 sm:px-6 bg-primary text-white" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: 'var(--font-jp), "Hiragino Sans", "Noto Sans CJK JP", sans-serif' }}>
+                <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: '"Noto Serif JP", serif' }}>
                   水
                 </div>
                 <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>
@@ -216,7 +216,7 @@ export default function DocsLayout({ children }) {
                 <Link href="/" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">Home</Link>
               </div>
               <p className="text-sm text-white/40">
-                Built with <span className="heartbeat">❤</span> by <a href="https://github.com/Shineii86" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-bold">Shinei Nouzen</a>
+                Built with <IconHeart size={14} className="heartbeat" /> by <a href="https://github.com/Shineii86" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-bold">Shinei Nouzen</a>
               </p>
             </div>
             <div className="mt-10 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>

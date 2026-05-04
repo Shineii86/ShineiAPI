@@ -317,7 +317,8 @@ code, pre, .font-mono {
   70%      { transform: scale(1); }
 }
 .heartbeat {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   animation: heartbeat 1.8s ease-in-out infinite;
   color: #ef4444;
 }
