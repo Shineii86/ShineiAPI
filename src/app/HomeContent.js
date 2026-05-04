@@ -561,7 +561,6 @@ export default function HomeContent() {
               <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.1</span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
-              <Link href="/docs" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-bold uppercase tracking-wider">Documentation</Link>
               <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-bold uppercase tracking-wider">GitHub</a>
               <a href="https://github.com/Shineii86/ShineiAPI/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-bold uppercase tracking-wider">License</a>
               <Link href="/terms" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-bold uppercase tracking-wider">Terms</Link>
