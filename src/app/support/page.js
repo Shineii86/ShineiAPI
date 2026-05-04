@@ -1,9 +1,9 @@
 /*
- * ╔══════════════════════════════════════════════════════╗
+ * ╔════════════════════════════════════════╗
  * ║  SHINEIAPI v2.0.1                                    ║
  * ║  Support — Neo-Brutalist                             ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
- * ╚══════════════════════════════════════════════════════╝
+ * ╚════════════════════════════════════════╝
  */
 
 import Link from 'next/link';
@@ -45,6 +45,42 @@ function FAQ({ question, children }) {
   );
 }
 
+function BookIcon({ className = "w-8 h-8" }) {
+  return (
+    <svg className={className} viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 19.5v-15A2.5 2.5 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+    </svg>
+  );
+}
+
+function BugIcon({ className = "w-8 h-8" }) {
+  return (
+    <svg className={className} viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m8 2 1.88 1.8" />
+      <path d="M14.12 3.88 16 2" />
+      <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1" />
+      <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 1 4-4h4a4 4 0 1 4 4v3c0 3.3-2.7 6-6 6" />
+      <path d="M12 20v-9" />
+      <path d="M6.53 9C4.6 8.8 3 7.1 3 5" />
+      <path d="M6 13H2" />
+      <path d="M3 21c0-2.1 1.7-3.9 3.8-4" />
+      <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4" />
+      <path d="M2 13h-4" />
+      <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4" />
+    </svg>
+  );
+}
+
+function LightbulbIcon({ className = "w-8 h-8" }) {
+  return (
+    <svg className={className} viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 2.5" />
+      <path d="M9 18h6" />
+      <path d="M10 22h4" />
+    </svg>
+  );
+}
+
 export default function SupportPage() {
   return (
     <LegalLayout>
@@ -67,12 +103,12 @@ export default function SupportPage() {
           {/* Quick Links */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
             {[
-              { icon: '📖', title: 'Documentation', desc: 'Full API reference with examples', href: '/docs', label: 'Read Docs' },
-              { icon: '🐛', title: 'Report a Bug', desc: 'Found something broken? Let us know', href: 'https://github.com/Shineii86/ShineiAPI/issues', label: 'Open Issue', external: true },
-              { icon: '💡', title: 'Request a Feature', desc: 'Have an idea? We want to hear it', href: 'https://github.com/Shineii86/ShineiAPI/issues', label: 'Request Feature', external: true },
+              { icon: <BookIcon />, title: 'Documentation', desc: 'Full API reference with examples', href: '/docs', label: 'Read Docs' },
+              { icon: <BugIcon />, title: 'Report a Bug', desc: 'Found something broken? Let us know', href: 'https://github.com/Shineii86/ShineiAPI/issues', label: 'Open Issue', external: true },
+              { icon: <LightbulbIcon />, title: 'Request a Feature', desc: 'Have an idea? We want to hear it', href: 'https://github.com/Shineii86/ShineiAPI/issues', label: 'Request Feature', external: true },
             ].map((item, i) => (
               <div key={i} className="card-brutal flex flex-col">
-                <span className="text-3xl mb-3">{item.icon}</span>
+                <span className="text-primary mb-3">{item.icon}</span>
                 <h3 className="font-display font-bold text-primary uppercase tracking-tight mb-1">{item.title}</h3>
                 <p className="text-sm text-stone-600 mb-4 flex-1">{item.desc}</p>
                 {item.external ? (
@@ -101,8 +137,8 @@ export default function SupportPage() {
               <FAQ question="What are the rate limits?">
                 <p>
                   <strong className="text-primary">60 requests per minute</strong> per IP address. Rate limit info is included
-                  in every response via <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">X-RateLimit-Limit</code>,{' '}
-                  <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">X-RateLimit-Remaining</code>, and{' '}
+                  in every response via <code className="bg-surface-dim px-1.5 py-0.5 border-primary text-xs font-mono">X-RateLimit-Limit</code>,{' '}
+                  <code className="bg-surface-dim px-1.5 py-0.5 border-primary text-xs font-mono">X-RateLimit-Remaining</code>, and{' '}
                   <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">Retry-After</code> headers.
                 </p>
               </FAQ>
@@ -178,7 +214,7 @@ export default function SupportPage() {
                 </h3>
                 <p className="text-sm text-stone-600">
                   The slug must match exactly. Try{' '}
-                  <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">/api/v1/search?q=title</code>{' '}
+                  <code className="bg-surface-dim px-1.5 py-0.5 border-primary text-xs font-mono">/api/v1/search?q=title</code>{' '}
                   first to find the correct slug, then use it in{' '}
                   <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">/api/v1/series/{'{slug}'}</code>.
                 </p>
@@ -202,8 +238,8 @@ export default function SupportPage() {
                 </h3>
                 <p className="text-sm text-stone-600">
                   Always check the <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">success</code> field
-                  in the response envelope. If <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">success: false</code>,
-                  the <code className="bg-surface-dim px-1.5 py-0.5 border border-primary text-xs font-mono">error</code> field contains details.
+                  in the response envelope. If <code className="bg-surface-dim px-1.5 py-0.5 border-primary text-xs font-mono">success: false</code>,
+                  the <code className="bg-surface-dim px-1.5 py-0.5 border-primary text-xs font-mono">error</code> field contains details.
                 </p>
               </div>
             </div>
@@ -254,7 +290,7 @@ export default function SupportPage() {
                   className="p-5 bg-surface-bright border-4 border-primary shadow-brutal hover:-translate-y-1 transition-all group"
                 >
                   <h3 className="font-display font-bold text-primary uppercase tracking-tight mb-1 group-hover:text-secondary transition-colors">{item.title}</h3>
-                  <p className="text-sm text-stone-600">{item.desc}</p>
+                  <p className="text-sm text-stone-60">{item.desc}</p>
                 </a>
               ))}
             </div>
@@ -263,7 +299,7 @@ export default function SupportPage() {
           {/* Cross-link */}
           <div className="mt-16 pt-8 border-t-4 border-primary">
             <Link href="/docs" className="btn-brutal inline-flex">
-              API Documentation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              API Documentation <svg width="16" height="16" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7-7 7"/></svg>
             </Link>
           </div>
     </LegalLayout>
