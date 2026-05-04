@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Redundant /docs links removed** — Landing page had 7 links pointing to `/docs` (nav Docs, nav Get Started ×2, hero CTA, recipe "See full docs", footer Documentation, bottom CTA). Removed 3 redundant ones (Get Started desktop/mobile, "See full docs"). Final count: 4 (nav, hero, bottom CTA).
 - **Docs page self-reference fixed** — Docs nav and footer both linked to `/docs` while already on the docs page. Renamed to "API Reference" for clarity.
 - **Footer self-links removed** — Landing, legal, and docs footers all had redundant Documentation/API Reference links already covered by nav or hero CTAs. Cleaned up across all 3 layouts.
+- **Redundant cross-links removed** — Support, privacy, and terms pages had cross-link buttons at the bottom that duplicated footer navigation. Removed all three.
+- **Support page added** — New `/support` page with 8 FAQs, 4 troubleshooting guides, quick links (docs, bugs, features), API status checks, and community links (Issues, Discussions, Source, Changelog). Added to footer and sitemap.
 
 ### ✨ Improvements
 - **Shared normalization logic** — Extracted `normalizeSeries()` helper in toraka.js to eliminate code duplication between basic and chapter-inclusive responses.
