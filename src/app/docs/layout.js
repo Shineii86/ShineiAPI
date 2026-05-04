@@ -99,7 +99,7 @@ export default function DocsLayout({ children }) {
           </Link>
           <div className="hidden sm:flex items-center gap-1">
             <DocsSearch />
-            <Link href="/docs" className="text-sm font-semibold text-primary bg-accent/80 px-3 py-1.5 transition-all duration-200" style={{ borderRadius: 10 }}>Documentation</Link>
+            <Link href="/docs" className="text-sm font-semibold text-primary bg-accent/80 px-3 py-1.5 transition-all duration-200" style={{ borderRadius: 10 }}>API Reference</Link>
             <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-primary/70 hover:text-primary hover:bg-black/5 px-3 py-1.5 transition-all duration-200 flex items-center gap-1.5" style={{ borderRadius: 10 }}>
               <IconGithub size={15} /> GitHub
             </a>
@@ -211,7 +211,7 @@ export default function DocsLayout({ children }) {
                 <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.1</span>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
-                <Link href="/docs" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">Documentation</Link>
+                <Link href="/docs" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">API Reference</Link>
                 <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">GitHub</a>
                 <Link href="/" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">Home</Link>
               </div>

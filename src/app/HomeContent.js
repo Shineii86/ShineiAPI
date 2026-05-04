@@ -396,12 +396,6 @@ export default function HomeContent() {
               <EndpointRow key={i} ep={ep} index={i} />
             ))}
           </div>
-
-          <div className="text-center mt-12">
-            <Link href="/docs" className="btn-brutal">
-              Full API Documentation <IconArrowRight size={18} />
-            </Link>
-          </div>
         </div>
       </section>
 
