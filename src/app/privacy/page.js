@@ -291,15 +291,7 @@ export default function PrivacyPage() {
             </div>
           </Section>
 
-          {/* Cross-link */}
-          <div className="mt-16 pt-8 border-t-4 border-primary">
-            <Link
-              href="/terms"
-              className="btn-brutal inline-flex"
-            >
-              Terms of Service <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </Link>
-          </div>
+          {/* Footer nav handled by LegalLayout */}
     </LegalLayout>
   );
 }

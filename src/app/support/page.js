@@ -260,16 +260,10 @@ export default function SupportPage() {
             </div>
           </Section>
 
-          {/* Cross-links */}
-          <div className="mt-16 pt-8 border-t-4 border-primary flex flex-wrap gap-4">
+          {/* Cross-link */}
+          <div className="mt-16 pt-8 border-t-4 border-primary">
             <Link href="/docs" className="btn-brutal inline-flex">
               API Documentation <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </Link>
-            <Link href="/terms" className="btn-brutal-outline inline-flex">
-              Terms of Service
-            </Link>
-            <Link href="/privacy" className="btn-brutal-outline inline-flex">
-              Privacy Policy
             </Link>
           </div>
     </LegalLayout>
