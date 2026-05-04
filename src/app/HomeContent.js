@@ -560,7 +560,7 @@ export default function HomeContent() {
         <div className="max-w-containerWidth mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-display font-bold text-sm" style={{ borderRadius: 8 }}>
+              <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: 'var(--font-jp), "Hiragino Sans", "Noto Sans CJK JP", sans-serif' }}>
                 水
               </div>
               <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>
