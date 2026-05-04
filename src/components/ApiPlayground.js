@@ -120,47 +120,140 @@ const endpoints = [
   },
 ];
 
-/* ─── Syntax token colors (inline styles for dangerouslySetInnerHTML) ─── */
-
-const TOK = {
-  key:  { color: '#c084fc', fontWeight: 600 },
-  str:  { color: '#34d399' },
-  num:  { color: '#fbbf24' },
-  bool: { color: '#60a5fa', fontWeight: 'bold' },
-  null: { color: '#94a3b8', fontStyle: 'italic' },
-  op:   { color: '#f472b6' },
-  brk:  { color: '#94a3b8' },
+/* ─── Token colours (original palette) ─── */
+const TOKEN_COLORS = {
+  key:   '#c084fc', // Purple (light violet) — JSON keys
+  string:'#34d399', // Emerald green — string values
+  number:'#fbbf24', // Amber / yellow — numbers
+  bool:  '#60a5fa', // Soft blue — true/false
+  null:  '#94a3b8', // Slate gray — null (italic)
+  bracket: '#94a3b8', // Slate gray — { } [ ]
+  operator: '#f472b6', // Pink — : ,
 };
 
-/* ─── JSON Syntax Highlighter ─── */
+/* ─── JSON Tokenizer (FIXED – no regex colour corruption) ─── */
+function tokenizeJson(json) {
+  const str = typeof json === 'string' ? json : JSON.stringify(json, null, 2);
+  const tokens = [];
+  let i = 0;
 
+  while (i < str.length) {
+    // Whitespace → keep as is
+    if (/\s/.test(str[i])) {
+      let ws = '';
+      while (i < str.length && /\s/.test(str[i])) ws += str[i++];
+      tokens.push({ type: 'text', value: ws });
+      continue;
+    }
+
+    // Strings (keys or values)
+    if (str[i] === '"') {
+      let value = '"';
+      i++;
+      while (i < str.length) {
+        const ch = str[i];
+        value += ch;
+        i++;
+        if (ch === '\\') {
+          if (i < str.length) { value += str[i]; i++; }
+          continue;
+        }
+        if (ch === '"') break;
+      }
+      // Key if followed by colon (ignoring whitespace)
+      const remaining = str.slice(i);
+      if (/^\s*:/.test(remaining)) {
+        tokens.push({ type: 'key', value });
+      } else {
+        tokens.push({ type: 'string', value });
+      }
+      continue;
+    }
+
+    // Numbers
+    if (/[-0-9]/.test(str[i])) {
+      let num = '';
+      while (i < str.length && /[0-9eE.+\-]/.test(str[i])) num += str[i++];
+      tokens.push({ type: 'number', value: num });
+      continue;
+    }
+
+    // Booleans / null
+    if (str.substr(i, 4) === 'true') {
+      tokens.push({ type: 'bool', value: 'true' });
+      i += 4;
+      continue;
+    }
+    if (str.substr(i, 5) === 'false') {
+      tokens.push({ type: 'bool', value: 'false' });
+      i += 5;
+      continue;
+    }
+    if (str.substr(i, 4) === 'null') {
+      tokens.push({ type: 'null', value: 'null' });
+      i += 4;
+      continue;
+    }
+
+    // Brackets: { } [ ]
+    if ('{}[]'.includes(str[i])) {
+      tokens.push({ type: 'bracket', value: str[i] });
+      i++;
+      continue;
+    }
+
+    // Operators: : ,
+    if (':,'.includes(str[i])) {
+      tokens.push({ type: 'operator', value: str[i] });
+      i++;
+      continue;
+    }
+
+    // Fallback (should never hit with valid JSON)
+    tokens.push({ type: 'text', value: str[i] });
+    i++;
+  }
+
+  return tokens;
+}
+
+/* ─── JSON Syntax Highlighter (fixed – no colour bleed) ─── */
 function JsonHighlight({ json }) {
   if (!json) return null;
-  const str = typeof json === 'string' ? json : JSON.stringify(json, null, 2);
-  const highlighted = str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    // keys (before colon)
-    .replace(/"([^"\\]*(\\.[^"\\]*)*)"\s*:/g, (match, p1) => {
-      return `<span style="color:#c084fc;font-weight:600">"${p1}"</span>:`;
-    })
-    // strings (remaining quoted values)
-    .replace(/"([^"\\]*(\\.[^"\\]*)*)"/g, (match) => {
-      return `<span style="color:#34d399">${match}</span>`;
-    })
-    // numbers
-    .replace(/\b(\d+\.?\d*)\b/g, '<span style="color:#fbbf24">$1</span>')
-    // booleans and null
-    .replace(/\b(true|false|null)\b/g, (match) => {
-      const color = match === 'null' ? '#94a3b8' : '#60a5fa';
-      return `<span style="color:${color};font-weight:bold">${match}</span>`;
-    });
+  const tokens = tokenizeJson(json);
 
+  const html = tokens
+    .map(token => {
+      const val = token.value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      switch (token.type) {
+        case 'key':
+          return `<span style="color:${TOKEN_COLORS.key};font-weight:600">${val}</span>`;
+        case 'string':
+          return `<span style="color:${TOKEN_COLORS.string}">${val}</span>`;
+        case 'number':
+          return `<span style="color:${TOKEN_COLORS.number}">${val}</span>`;
+        case 'bool':
+          return `<span style="color:${TOKEN_COLORS.bool};font-weight:bold">${val}</span>`;
+        case 'null':
+          return `<span style="color:${TOKEN_COLORS.null};font-style:italic">${val}</span>`;
+        case 'bracket':
+          return `<span style="color:${TOKEN_COLORS.bracket}">${val}</span>`;
+        case 'operator':
+          return `<span style="color:${TOKEN_COLORS.operator}">${val}</span>`;
+        default:
+          return val;
+      }
+    })
+    .join('');
+
+  // No base text colour → inherits white from parent (#0d1117 container)
   return (
     <pre
       className="p-5 text-[13px] leading-relaxed overflow-x-auto font-mono"
-      dangerouslySetInnerHTML={{ __html: highlighted }}
+      dangerouslySetInnerHTML={{ __html: html }}
     />
   );
 }
