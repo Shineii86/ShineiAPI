@@ -35,7 +35,6 @@ export default function LandingNav() {
           <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-primary/70 hover:text-primary hover:bg-black/5 px-3 py-1.5 transition-all duration-200 flex items-center gap-1.5" style={{ borderRadius: 10 }}>
             <IconGithub size={15} /> GitHub
           </a>
-          <Link href="/docs" className="btn-brutal !py-2 !px-5 !text-xs ml-2">Get Started</Link>
         </div>
         <button
           className="sm:hidden p-2 text-primary hover:bg-black/5 transition-all duration-200"
@@ -55,7 +54,6 @@ export default function LandingNav() {
             <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="block text-sm font-semibold text-primary hover:bg-black/5 px-3 py-3 transition-all duration-200 min-h-[44px] flex items-center" style={{ borderRadius: 10 }}>
               <IconGithub size={15} className="mr-2" /> GitHub
             </a>
-            <Link href="/docs" onClick={() => setMobileOpen(false)} className="block btn-brutal !py-2.5 !px-5 !text-xs text-center mt-2">Get Started</Link>
           </div>
         </div>
       )}

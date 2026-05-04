@@ -443,9 +443,6 @@ export default function HomeContent() {
                 </div>
                 <h3 className="text-xl font-bold uppercase font-display mb-3">{currentRecipe.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6">{currentRecipe.desc}</p>
-                <Link href="/docs" className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-wider text-tertiary hover:underline">
-                  See full docs <IconArrowRight size={14} />
-                </Link>
               </div>
               <div className="lg:col-span-3 code-brutal">
                 <div className="code-brutal-header">
