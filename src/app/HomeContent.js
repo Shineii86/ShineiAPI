@@ -616,7 +616,8 @@ export default function HomeContent() {
             </p>
           </div>
           <div className="mt-10 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <p className="text-xs text-white/30">Data provided by <a href="https://toraka.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-accent transition-colors">Toraka</a>. ShineiAPI is not affiliated with or endorsed by Toraka.</p>
+            <p className="text-[11px] text-white/30 leading-relaxed max-w-3xl mx-auto text-center"><strong className="text-white/40">Disclaimer:</strong> This project is unofficial and not affiliated with or endorsed by Toraka. ShineiAPI acts as a middleware/proxy to the official Toraka backend. No content is hosted or redistributed. Rate limiting is enforced to avoid overloading upstream. Use responsibly and respect the original site&apos;s terms of service.</p>
+            <p className="text-xs text-white/20 mt-3 text-center">Data provided by <a href="https://toraka.com" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-accent transition-colors">Toraka</a>.</p>
           </div>
         </div>
       </footer>

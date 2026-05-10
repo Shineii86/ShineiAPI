@@ -1308,6 +1308,17 @@ Yes! The full OpenAPI 3.1 spec is available at [`/openapi.yaml`](https://shineia
 
 ---
 
+## ⚠️ Legal Disclaimer
+
+This project is **unofficial** and **not affiliated with or endorsed by Toraka**.
+
+- This API acts as a middleware/proxy to the official Toraka backend
+- No content is hosted or redistributed
+- Rate limiting is enforced to avoid overloading upstream
+- Use responsibly and respect the original site's terms of service
+
+---
+
 ## 📜 Legal
 
 - **[Terms of Service](https://shineiapi.vercel.app/terms)** — Rules governing API usage
