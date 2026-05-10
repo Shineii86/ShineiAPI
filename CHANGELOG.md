@@ -10,8 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 📝 Documentation
 - **README.md updated for v2.0.3** — Version badges, changelog section, project structure (added BrowseContent, GenresContent, SeriesContent, Footer, LandingNav, LegalLayout), Key Features table (marquee + performance), removed stale entries.
 
+### 🔧 Infrastructure
+- **vercel.json version sync** — X-Powered-By header updated to v2.0.3
+- **Multi-region deployment** — Added 5 new Vercel regions: sfo1 (US West), cdg1 (Europe), hnd1 (Tokyo), sin1 (Singapore), gru1 (São Paulo) for lower global latency
+- **Sitemap updated** — Added /browse and /browse/genres routes
+
 ### ✨ New Features
 - **Infinite scroll marquee banner** — Added a seamless looping marquee between the hero and stats sections on the landing page. Displays 15 rotating keywords (Free API, No Authentication, Manga Data, CORS Enabled, etc.) with accent-colored dots. Pauses on hover. Responsive sizing for mobile. Inspired by neo-brutalist marquee patterns.
+- **Dynamic OG images** — Series pages now generate rich social preview cards via `/api/og` using `@vercel/og`. Shows title, rating, status, type, chapter count, and genres in a branded layout. Default variant for the homepage.
+- **Search autocomplete typeahead** — Browse page search bar now shows live suggestions as you type (300ms debounce). Displays cover thumbnail, title, rating, type, and chapter count. Click to open series detail or "See all results" for full search.
+- **API usage analytics** — New `src/lib/analytics` module tracks endpoint usage, top search queries, error rates, and response times in-memory. Exposed in `GET /api/v1/stats` under `analytics` section. Data resets on cold start.
+- **Numbered pagination** — Replaced basic Previous/Next buttons with a full `Pagination` component showing numbered pages with ellipsis, active state, and page info. Used in browse search results.
+- **Browse error/loading states** — Added `error.js` and `loading.js` for `/browse`, `/browse/genres`, and `/browse/series/[slug]` routes. Custom error boundaries with retry buttons and skeleton loading screens matching each page's layout.
 
 ### ⚡ Performance Optimizations
 - **Dynamic imports for heavy components** — `ApiPlayground` is now lazy-loaded with `next/dynamic` on both the landing page and docs page. Only loads when scrolled into view, reducing initial JS bundle by ~300 lines of client code.

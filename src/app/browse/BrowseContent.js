@@ -16,6 +16,7 @@ import {
   IconGithub, IconHeart, IconTag, IconShuffle, IconTrophy,
   IconChevronDown, IconCode,
 } from '@/components/icons';
+import Pagination from '@/components/Pagination';
 
 /* ═══════════════════════════════════════════════════════
    API Helpers
@@ -531,6 +532,37 @@ export default function BrowseContent() {
   const [loading, setLoading] = useState(true);
   const searchInputRef = useRef(null);
 
+  /* ─── Autocomplete suggestions ─── */
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestTimerRef = useRef(null);
+
+  /* Debounced autocomplete — fires 300ms after user stops typing */
+  useEffect(() => {
+    if (suggestTimerRef.current) clearTimeout(suggestTimerRef.current);
+    if (searchQuery.trim().length < 2) {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+    suggestTimerRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/v1/search?q=${encodeURIComponent(searchQuery.trim())}&page=1`);
+        const json = await res.json();
+        if (json.success && json.data.length > 0) {
+          setSuggestions(json.data.slice(0, 6));
+          setShowSuggestions(true);
+        } else {
+          setSuggestions([]);
+          setShowSuggestions(false);
+        }
+      } catch {
+        setSuggestions([]);
+      }
+    }, 300);
+    return () => clearTimeout(suggestTimerRef.current);
+  }, [searchQuery]);
+
   /* ─── Initial data load ─── */
   useEffect(() => {
     async function load() {
@@ -714,16 +746,19 @@ export default function BrowseContent() {
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Type a manga or manhwa name, then press Enter..."
+                placeholder="Type a manga or manhwa name..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') triggerSearch(); }}
+                onChange={(e) => { setSearchQuery(e.target.value); setShowSuggestions(true); }}
+                onKeyDown={(e) => { if (e.key === 'Enter') { triggerSearch(); setShowSuggestions(false); } }}
+                onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                 className="w-full pl-11 pr-20 py-3.5 bg-transparent text-sm font-medium text-primary placeholder-gray-400 focus:outline-none"
+                autoComplete="off"
               />
               <div className="absolute right-2 flex items-center gap-1">
                 {searchQuery && (
                   <button
-                    onClick={() => { setSearchQuery(''); setSearchResults(null); searchInputRef.current?.focus(); }}
+                    onClick={() => { setSearchQuery(''); setSearchResults(null); setSuggestions([]); setShowSuggestions(false); searchInputRef.current?.focus(); }}
                     className="w-7 h-7 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
                     aria-label="Clear search"
                   >
@@ -731,7 +766,7 @@ export default function BrowseContent() {
                   </button>
                 )}
                 <button
-                  onClick={triggerSearch}
+                  onClick={() => { triggerSearch(); setShowSuggestions(false); }}
                   className="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors"
                   aria-label="Search"
                 >
@@ -739,6 +774,44 @@ export default function BrowseContent() {
                 </button>
               </div>
             </div>
+
+            {/* Autocomplete Dropdown */}
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-surface-bright border-2 border-primary/10 rounded-2xl shadow-brutal-lg overflow-hidden z-50 animate-fade-in">
+                {suggestions.map((s, i) => (
+                  <button
+                    key={s.id || s.slug}
+                    onMouseDown={(e) => { e.preventDefault(); setSelectedSeries(s); setShowSuggestions(false); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-accent/20 transition-colors text-left border-b border-primary/5 last:border-b-0"
+                  >
+                    <div className="w-10 h-12 rounded-lg overflow-hidden shrink-0 bg-primary/5">
+                      {s.cover && (
+                        <img src={s.cover?.small || s.cover} alt="" className="w-full h-full object-cover" loading="lazy" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-bold text-primary truncate">{s.title}</div>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        {s.rating && (
+                          <span className="text-[11px] font-bold text-yellow-600 flex items-center gap-0.5">
+                            <IconStarFilled size={10} className="text-yellow-500" /> {formatRating(s.rating)}
+                          </span>
+                        )}
+                        {s.type && <span className="text-[11px] text-gray-400">{s.type}</span>}
+                        {s.chapters_count && <span className="text-[11px] text-gray-400">{s.chapters_count} ch</span>}
+                      </div>
+                    </div>
+                    <IconChevronRight size={14} className="text-gray-300 shrink-0" />
+                  </button>
+                ))}
+                <button
+                  onMouseDown={(e) => { e.preventDefault(); triggerSearch(); setShowSuggestions(false); }}
+                  className="w-full px-4 py-2.5 text-xs font-bold text-tertiary hover:bg-tertiary/10 transition-colors text-center uppercase tracking-wider"
+                >
+                  See all results for &quot;{searchQuery}&quot;
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Genre Pills */}
@@ -785,27 +858,13 @@ export default function BrowseContent() {
                   ))}
                 </div>
                 {searchTotal > 25 && (
-                  <div className="mt-8 flex justify-center gap-3">
-                    {searchPage > 1 && (
-                      <button
-                        onClick={() => triggerSearch(searchPage - 1)}
-                        className="btn-brutal-outline !text-xs !px-4 !py-2"
-                      >
-                        <IconArrowLeft size={14} /> Previous
-                      </button>
-                    )}
-                    <span className="flex items-center px-4 py-2 text-xs font-bold text-gray-500">
-                      Page {searchPage}
-                    </span>
-                    {searchPage * 25 < searchTotal && (
-                      <button
-                        onClick={() => triggerSearch(searchPage + 1)}
-                        className="btn-brutal-outline !text-xs !px-4 !py-2"
-                      >
-                        Next <IconArrowRight size={14} />
-                      </button>
-                    )}
-                  </div>
+                  <Pagination
+                    className="mt-8"
+                    currentPage={searchPage}
+                    totalItems={searchTotal}
+                    perPage={25}
+                    onPageChange={(p) => triggerSearch(p)}
+                  />
                 )}
               </>
             ) : (

@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "regions": ["iad1"],
+  "regions": ["iad1", "sfo1", "cdg1", "hnd1", "sin1", "gru1"],
   "functions": {
     "src/app/api/**/*.js": {
       "maxDuration": 30
@@ -12,7 +12,7 @@
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
-        { "key": "X-Powered-By", "value": "ShineiAPI v2.0.2" }
+        { "key": "X-Powered-By", "value": "ShineiAPI v2.0.3" }
       ]
     }
   ]

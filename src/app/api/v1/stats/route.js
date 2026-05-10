@@ -4,37 +4,16 @@
  * ║  Stats Endpoint — Public API Statistics              ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
- *
- * File       : src/app/api/v1/stats/route.js
- * Purpose    : Public API statistics and metadata
- *
- * Summary    :
- * Returns API statistics including uptime, cache performance,
- * rate limit config, and endpoint count. Uses the standard
- * response helper for consistent headers and format.
- *
- * Author     : Shineii86
- * License    : MIT
- * Created    : 2026-05-03
- * Updated    : 2026-05-03
- *
  */
 
 const cache = require('@/lib/cache');
 const { success, cors } = require('@/lib/response');
+const { getAnalytics } = require('@/lib/analytics');
 
-/* Force dynamic rendering (no static caching of stats) */
 export const dynamic = 'force-dynamic';
 
-/* Track server start time for uptime calculation */
 const startTime = Date.now();
 
-/**
- * Format milliseconds into a human-readable uptime string
- *
- * @param {number} ms - Uptime in milliseconds
- * @returns {string} Formatted uptime (e.g., "2d 5h 30m")
- */
 function formatUptime(ms) {
   const s = Math.floor(ms / 1000);
   const m = Math.floor(s / 60);
@@ -45,38 +24,27 @@ function formatUptime(ms) {
   return `${m}m ${s % 60}s`;
 }
 
-/**
- * GET handler for /api/v1/stats
- *
- * Returns public API statistics and metadata.
- *
- * @returns {Response} JSON response with API stats
- *
- * @example
- * GET /api/v1/stats
- */
 export async function GET(request) {
-  if (request.method === 'OPTIONS') {
-    return cors();
-  }
+  if (request.method === 'OPTIONS') return cors();
 
   const uptimeMs = Date.now() - startTime;
   const cacheStats = cache.getStats();
+  const usage = getAnalytics();
 
   return success({
     name: 'ShineiAPI',
-    version: '2.0.2',
+    version: '2.0.3',
     description: 'Free manga, manhwa, and webtoon REST API',
-    uptime: {
-      ms: uptimeMs,
-      human: formatUptime(uptimeMs),
-    },
+    uptime: { ms: uptimeMs, human: formatUptime(uptimeMs) },
     cache: cacheStats,
     endpoints: 10,
-    rate_limit: {
-      max_requests: 60,
-      window: '60s',
-      scope: 'per IP',
+    rate_limit: { max_requests: 60, window: '60s', scope: 'per IP' },
+    analytics: {
+      total_requests: usage.total_requests,
+      top_endpoints: usage.top_endpoints,
+      top_queries: usage.top_queries,
+      errors: usage.errors,
+      response_times: usage.response_times,
     },
     data_source: 'Toraka (toraka.com)',
     documentation: 'https://shineiapi.vercel.app/docs',
@@ -85,9 +53,6 @@ export async function GET(request) {
   });
 }
 
-/**
- * OPTIONS handler for CORS preflight requests
- */
 export async function OPTIONS() {
   return cors();
 }

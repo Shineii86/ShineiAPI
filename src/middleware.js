@@ -23,6 +23,7 @@
 
 import { NextResponse } from 'next/server';
 import { RATE_LIMIT } from './lib/constants';
+import { trackRequest } from './lib/analytics';
 
 /**
  * In-memory rate limit store
@@ -179,6 +180,11 @@ export function middleware(request) {
     console.log(
       `[${timestamp}] ${requestId} ${method} ${pathname} — IP: ${clientIp} — Remaining: ${remaining}`
     );
+
+    /* ─── Track analytics ─── */
+    const searchParams = request.nextUrl.searchParams;
+    const query = searchParams.get('q');
+    trackRequest({ pathname, status: 0, durationMs: 0, ip: clientIp, query });
 
     /* ─── Continue with rate limit headers in the response ─── */
     const response = NextResponse.next();
