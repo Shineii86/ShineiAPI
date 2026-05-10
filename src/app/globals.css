@@ -174,19 +174,6 @@
   border-color: rgba(255,255,255,0.06);
 }
 
-/* ── Dark mode: btn-brutal on dark bg sections ── */
-[data-theme="dark"] footer .btn-brutal,
-[data-theme="dark"] .bg-primary.text-white .btn-brutal {
-  background: rgb(var(--accent));
-  color: #0a0a0a;
-  border-color: rgba(255,255,255,0.3);
-}
-[data-theme="dark"] footer .btn-brutal:hover,
-[data-theme="dark"] .bg-primary.text-white .btn-brutal:hover {
-  background: #fde047;
-  color: #0a0a0a;
-}
-
 /* ── Dark mode: section CTA banners ── */
 [data-theme="dark"] .bg-primary.text-white.border-4 {
   background: #0a0a0a;

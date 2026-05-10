@@ -7,19 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.2] - 2026-05-10
 
-### ✨ Improvements
-- **Live Browse Page (`/browse`)** — Full manhwa-style browsing experience powered entirely by ShineiAPI endpoints. Features a hero banner with featured series, horizontally scrollable Popular and Trending rows with Load More buttons, Top Rated grid with ranked cards, live search with debounce and genre filtering, and a detailed series modal with chapter list, metadata grid, genres, authors, artists, and official sources. Zero mock data — every section fetches from the API in real time.
-- **Genre Browse Page (`/browse/genres`)** — Dedicated genre browsing page with colorful genre cards (emoji + color-coded per genre). Clicking a genre loads matching series with pagination and Load More support. Series cards link to individual detail pages.
-- **Series Detail Page (`/browse/series/[slug]`)** — Deep-linkable, shareable series pages with full metadata, chapter list (lazy-loaded with Show All toggle), banner, cover, genres, authors, artists, official sources, and API source callout. Dynamic OG metadata for social sharing.
-- **Dark Mode Toggle** — Light/dark theme switch persisted to localStorage. System preference detection on first visit. Floating toggle button (bottom-right) on all pages. Full dark theme with inverted colors, adjusted shadows, and frosted nav variants. Inline script prevents flash of unstyled content.
-- **Load More for Browse Rows** — Popular and Trending horizontal scroll rows now have a "Load More" card at the end that fetches the next page of results and appends them.
-- **Browse link added to navigation** — Landing page nav (desktop + mobile) and docs sidebar now include a "Browse" / "Live Browse" link. Browse page nav includes a "Genres" link.
-- **Home page Browse CTAs** — Hero section now has an "Explore Series" button alongside "View Documentation" and "Star on GitHub". Bottom CTA section has a "Browse Series" button.
-- **Sitemap updated** — Added `/browse` and `/browse/genres` routes with daily change frequency.
-- **Version sync to v2.0.2** — All 40+ source files, constants, middleware, headers, tests, README, OpenAPI spec, package.json, and vercel.json synced to v2.0.2.
-
 ### 🐛 Bug Fixes
-- **Docs footer inconsistency** — The docs page footer (`/docs`) only had "GitHub" and "Home" links, while the landing page and legal pages (Terms, Privacy, Support) all had "GitHub", "License", "Terms", "Privacy", "Support". Updated the docs layout footer to match the rest of the site with all five navigation links.
+- **Build: npm install failure** — Dependabot bumped `react` to v19.2.5 while `react-dom` stayed at v18.3.1 and `next` at v14.2.15 (requires React 18). Also `tailwindcss` was bumped to v4 which uses a different config format. Fixed by pinning `react` to `^18.3.1` and `tailwindcss` to `^3.4.17` to match the existing codebase.
+- **Build: CSS circular dependency** — Dark mode override targeting `.btn-brutal` inside `footer` caused a circular dependency with Tailwind's `@apply bg-primary`. Removed the conflicting selector override.
+- **Dark mode colors** — Full dark mode audit: text-gray-600/500/400 now readable on dark backgrounds, bg-gray-100 adapts, bg-primary/5 and border-primary/8 properly visible, footer bg-primary text-white fixed (was invisible in dark), nav logo inverted, search input, genre pills, info cards, method badges, code block headers all adapted for dark mode.
+- **Emojis removed** — Genre cards on /browse/genres now use inline SVG icons instead of emoji characters.
+- **Docs footer inconsistency** — The docs page footer now matches the rest of the site with all five navigation links.
+
+### ✨ Improvements
+- **Live Browse Page (`/browse`)** — Full manhwa-style browsing experience powered entirely by ShineiAPI endpoints. Features a hero banner with featured series, horizontally scrollable Popular and Trending rows with Load More buttons, Top Rated grid with ranked cards, live search with debounce and genre filtering, and a detailed series modal with chapter list, metadata grid, genres, authors, artists, and official sources.
+- **Genre Browse Page (`/browse/genres`)** — Dedicated genre browsing page with color-coded genre cards with SVG icons. Clicking a genre loads matching series with pagination and Load More support.
+- **Series Detail Page (`/browse/series/[slug]`)** — Deep-linkable, shareable series pages with full metadata, chapter list, banner, cover, genres, authors, artists, official sources, and API source callout. Dynamic OG metadata for social sharing.
+- **Dark Mode Toggle** — Light/dark theme switch persisted to localStorage. System preference detection on first visit. Floating toggle button on all pages. Full dark theme with inverted colors. Inline script prevents flash of unstyled content.
+- **Load More for Browse Rows** — Popular and Trending horizontal scroll rows now have a "Load More" card at the end that fetches the next page of results.
+- **Browse link added to navigation** — Landing page nav (desktop + mobile), docs sidebar, and browse page nav all updated with Browse/Genres/Home links.
+- **Home page Browse CTAs** — Hero section has "Explore Series" button, bottom CTA has "Browse Series" button.
+- **Sitemap updated** — Added `/browse` and `/browse/genres` routes.
+- **Version sync to v2.0.2** — All source files synced.
 
 ## [2.0.1] - 2026-05-03
 
