@@ -164,6 +164,10 @@ function normalizeSeries(raw, includeChapters = true) {
       order:        ch.order,
       title:        ch.title,
       source:       ch.source_name,
+      sources:      (ch.sources || []).map(s => ({
+        name: s.name,
+        url:  s.url,
+      })),
       published_at: ch.published_at,
     }));
   }

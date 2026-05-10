@@ -290,9 +290,21 @@ export default function SeriesContent({ slug }) {
                             <span className="text-sm font-semibold text-primary truncate">
                               {ch.title || `Chapter ${ch.order || i + 1}`}
                             </span>
-                            {ch.source && (
-                              <span className="text-[10px] font-bold text-tertiary/70 bg-tertiary/8 px-1.5 py-0.5 rounded shrink-0">
-                                {ch.source}
+                          </div>
+                          <div className="flex items-center gap-3 shrink-0 ml-3">
+                            {ch.sources?.length > 0 && ch.sources[0]?.url && (
+                              <a
+                                href={ch.sources[0].url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[10px] font-bold text-tertiary hover:text-tertiary/80 bg-tertiary/8 hover:bg-tertiary/15 px-2 py-1 rounded transition-colors"
+                              >
+                                Read
+                              </a>
+                            )}
+                            {ch.published_at && (
+                              <span className="text-[11px] text-gray-400 font-medium">
+                                {new Date(ch.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                               </span>
                             )}
                           </div>

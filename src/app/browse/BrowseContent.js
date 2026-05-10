@@ -449,17 +449,24 @@ function SeriesDetail({ slug, onClose }) {
                           <span className="text-sm font-semibold text-primary truncate">
                             {ch.title || `Chapter ${ch.order || i + 1}`}
                           </span>
-                          {ch.source && (
-                            <span className="text-[10px] font-bold text-tertiary/70 bg-tertiary/8 px-1.5 py-0.5 rounded shrink-0">
-                              {ch.source}
+                        </div>
+                        <div className="flex items-center gap-3 shrink-0 ml-3">
+                          {ch.sources?.length > 0 && ch.sources[0]?.url && (
+                            <a
+                              href={ch.sources[0].url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[10px] font-bold text-tertiary hover:text-tertiary/80 bg-tertiary/8 hover:bg-tertiary/15 px-2 py-1 rounded transition-colors"
+                            >
+                              Read
+                            </a>
+                          )}
+                          {ch.published_at && (
+                            <span className="text-[11px] text-gray-400 font-medium">
+                              {new Date(ch.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                             </span>
                           )}
                         </div>
-                        {ch.published_at && (
-                          <span className="text-[11px] text-gray-400 font-medium shrink-0 ml-3">
-                            {new Date(ch.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                          </span>
-                        )}
                       </div>
                     ))}
                   </div>
@@ -522,7 +529,6 @@ export default function BrowseContent() {
   const [activeGenre, setActiveGenre] = useState(null);
 
   const [loading, setLoading] = useState(true);
-  const searchTimeout = useRef(null);
   const searchInputRef = useRef(null);
 
   /* ─── Initial data load ─── */
@@ -553,53 +559,41 @@ export default function BrowseContent() {
   }, []);
 
   /* ─── Search with debounce ─── */
-  const handleSearch = useCallback((query, page = 1) => {
-    if (searchTimeout.current) clearTimeout(searchTimeout.current);
-
-    if (!query || query.trim().length === 0) {
+  const triggerSearch = useCallback(async (page = 1) => {
+    const query = searchQuery;
+    if (!query || query.trim().length < 2) {
       setSearchResults(null);
-      setSearchQuery('');
-      return;
-    }
-
-    setSearchQuery(query);
-
-    if (query.trim().length < 2) {
-      setSearchResults(null);
-      setSearchLoading(false);
       return;
     }
 
     setSearchLoading(true);
 
-    searchTimeout.current = setTimeout(async () => {
-      try {
-        const params = new URLSearchParams({ q: query.trim(), page: String(page) });
-        if (activeGenre) params.append('genre', activeGenre);
-        const res = await fetch(`/api/v1/search?${params}`);
-        const json = await res.json();
-        if (json.success) {
-          setSearchResults(json.data);
-          setSearchTotal(json.pagination?.total || json.data.length);
-          setSearchPage(page);
-        } else {
-          setSearchResults([]);
-        }
-      } catch {
+    try {
+      const params = new URLSearchParams({ q: query.trim(), page: String(page) });
+      if (activeGenre) params.append('genre', activeGenre);
+      const res = await fetch(`/api/v1/search?${params}`);
+      const json = await res.json();
+      if (json.success) {
+        setSearchResults(json.data);
+        setSearchTotal(json.pagination?.total || json.data.length);
+        setSearchPage(page);
+      } else {
         setSearchResults([]);
-      } finally {
-        setSearchLoading(false);
       }
-    }, 350);
-  }, [activeGenre]);
+    } catch {
+      setSearchResults([]);
+    } finally {
+      setSearchLoading(false);
+    }
+  }, [searchQuery, activeGenre]);
 
   /* ─── Genre filter ─── */
   const handleGenreClick = useCallback((slug) => {
     setActiveGenre(prev => prev === slug ? null : slug);
     if (searchQuery) {
-      handleSearch(searchQuery, 1);
+      triggerSearch(1);
     }
-  }, [searchQuery, handleSearch]);
+  }, [searchQuery, triggerSearch]);
 
   /* ─── Load more for Popular ─── */
   const loadMorePopular = useCallback(async () => {
@@ -720,20 +714,30 @@ export default function BrowseContent() {
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search manga, manhwa, webtoons..."
+                placeholder="Type a manga or manhwa name, then press Enter..."
                 value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                className="w-full pl-11 pr-4 py-3.5 bg-transparent text-sm font-medium text-primary placeholder-gray-400 focus:outline-none"
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') triggerSearch(); }}
+                className="w-full pl-11 pr-20 py-3.5 bg-transparent text-sm font-medium text-primary placeholder-gray-400 focus:outline-none"
               />
-              {searchQuery && (
+              <div className="absolute right-2 flex items-center gap-1">
+                {searchQuery && (
+                  <button
+                    onClick={() => { setSearchQuery(''); setSearchResults(null); searchInputRef.current?.focus(); }}
+                    className="w-7 h-7 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
+                    aria-label="Clear search"
+                  >
+                    <IconX size={16} />
+                  </button>
+                )}
                 <button
-                  onClick={() => { setSearchQuery(''); setSearchResults(null); searchInputRef.current?.focus(); }}
-                  className="absolute right-3 w-7 h-7 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
-                  aria-label="Clear search"
+                  onClick={triggerSearch}
+                  className="w-8 h-8 flex items-center justify-center bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors"
+                  aria-label="Search"
                 >
-                  <IconX size={16} />
+                  <IconArrowRight size={16} />
                 </button>
-              )}
+              </div>
             </div>
           </div>
 
@@ -784,7 +788,7 @@ export default function BrowseContent() {
                   <div className="mt-8 flex justify-center gap-3">
                     {searchPage > 1 && (
                       <button
-                        onClick={() => handleSearch(searchQuery, searchPage - 1)}
+                        onClick={() => triggerSearch(searchPage - 1)}
                         className="btn-brutal-outline !text-xs !px-4 !py-2"
                       >
                         <IconArrowLeft size={14} /> Previous
@@ -795,7 +799,7 @@ export default function BrowseContent() {
                     </span>
                     {searchPage * 25 < searchTotal && (
                       <button
-                        onClick={() => handleSearch(searchQuery, searchPage + 1)}
+                        onClick={() => triggerSearch(searchPage + 1)}
                         className="btn-brutal-outline !text-xs !px-4 !py-2"
                       >
                         Next <IconArrowRight size={14} />
