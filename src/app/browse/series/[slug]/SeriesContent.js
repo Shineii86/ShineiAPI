@@ -16,6 +16,13 @@ import {
 
 const API = '/api/v1';
 
+function formatRating(r) {
+  if (!r && r !== 0) return null;
+  const n = parseFloat(r);
+  if (isNaN(n)) return r;
+  return n.toFixed(1);
+}
+
 function CoverImage({ src, alt, className = '', aspect = 'aspect-[3/4]' }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -122,7 +129,7 @@ export default function SeriesContent({ slug }) {
               {series.banner ? (
                 <img src={series.banner} alt="" className="w-full h-full object-cover opacity-40" />
               ) : series.cover ? (
-                <img src={series.cover?.large || series.cover} alt="" className="w-full h-full object-cover opacity-20 blur-xl scale-110" />
+                <img src={series.cover?.large || series.cover?.small || series.cover} alt="" className="w-full h-full object-cover opacity-20 blur-xl scale-110" />
               ) : null}
               <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
             </div>
@@ -151,7 +158,7 @@ export default function SeriesContent({ slug }) {
                     {series.rating && (
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-accent/20 text-primary text-xs font-bold rounded-lg">
                         <IconStarFilled size={12} className="text-yellow-500" />
-                        {series.rating}
+                        {formatRating(series.rating)}
                       </span>
                     )}
                     {series.status && (
@@ -283,6 +290,11 @@ export default function SeriesContent({ slug }) {
                             <span className="text-sm font-semibold text-primary truncate">
                               {ch.title || `Chapter ${ch.order || i + 1}`}
                             </span>
+                            {ch.source && (
+                              <span className="text-[10px] font-bold text-tertiary/70 bg-tertiary/8 px-1.5 py-0.5 rounded shrink-0">
+                                {ch.source}
+                              </span>
+                            )}
                           </div>
                           {ch.published_at && (
                             <span className="text-[11px] text-gray-400 font-medium shrink-0 ml-3">

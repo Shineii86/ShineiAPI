@@ -16,6 +16,13 @@ import {
 
 const API = '/api/v1';
 
+function formatRating(r) {
+  if (!r && r !== 0) return null;
+  const n = parseFloat(r);
+  if (isNaN(n)) return r;
+  return n.toFixed(1);
+}
+
 /* ═══ Genre color map ═══ */
 const GENRE_COLORS = {
   action: { bg: 'bg-red-500/10', text: 'text-red-700', border: 'border-red-500/20' },
@@ -123,7 +130,7 @@ function SeriesCard({ series, onClick }) {
         {series.rating && (
           <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 bg-black/60 backdrop-blur-md text-white text-[11px] font-bold rounded-lg border border-white/10">
             <IconStarFilled size={11} className="text-yellow-400" />
-            {series.rating}
+            {formatRating(series.rating)}
           </div>
         )}
       </div>

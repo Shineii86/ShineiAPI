@@ -23,6 +23,13 @@ import {
 
 const API = '/api/v1';
 
+function formatRating(r) {
+  if (!r && r !== 0) return null;
+  const n = parseFloat(r);
+  if (isNaN(n)) return r;
+  return n.toFixed(1);
+}
+
 async function fetchJSON(endpoint) {
   const res = await fetch(`${API}${endpoint}`, { next: { revalidate: 60 } });
   if (!res.ok) throw new Error(`API ${res.status}`);
@@ -104,7 +111,7 @@ function SeriesCard({ series, onClick, index = 0 }) {
         {series.rating && (
           <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 bg-black/60 backdrop-blur-md text-white text-[11px] font-bold rounded-lg border border-white/10">
             <IconStarFilled size={11} className="text-yellow-400" />
-            {series.rating}
+            {formatRating(series.rating)}
           </div>
         )}
         {/* Bottom info on hover */}
@@ -294,7 +301,7 @@ function SeriesDetail({ slug, onClose }) {
               {series.banner ? (
                 <img src={series.banner} alt="" className="w-full h-full object-cover opacity-40" />
               ) : series.cover ? (
-                <img src={series.cover?.large || series.cover} alt="" className="w-full h-full object-cover opacity-20 blur-xl scale-110" />
+                <img src={series.cover?.large || series.cover?.small || series.cover} alt="" className="w-full h-full object-cover opacity-20 blur-xl scale-110" />
               ) : null}
               <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
             </div>
@@ -323,7 +330,7 @@ function SeriesDetail({ slug, onClose }) {
                     {series.rating && (
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-accent/20 text-primary text-xs font-bold rounded-lg">
                         <IconStarFilled size={12} className="text-yellow-500" />
-                        {series.rating}
+                        {formatRating(series.rating)}
                       </span>
                     )}
                     {series.status && (
@@ -442,6 +449,11 @@ function SeriesDetail({ slug, onClose }) {
                           <span className="text-sm font-semibold text-primary truncate">
                             {ch.title || `Chapter ${ch.order || i + 1}`}
                           </span>
+                          {ch.source && (
+                            <span className="text-[10px] font-bold text-tertiary/70 bg-tertiary/8 px-1.5 py-0.5 rounded shrink-0">
+                              {ch.source}
+                            </span>
+                          )}
                         </div>
                         {ch.published_at && (
                           <span className="text-[11px] text-gray-400 font-medium shrink-0 ml-3">
@@ -544,18 +556,25 @@ export default function BrowseContent() {
   const handleSearch = useCallback((query, page = 1) => {
     if (searchTimeout.current) clearTimeout(searchTimeout.current);
 
-    if (!query || query.trim().length < 2) {
+    if (!query || query.trim().length === 0) {
       setSearchResults(null);
       setSearchQuery('');
       return;
     }
 
     setSearchQuery(query);
+
+    if (query.trim().length < 2) {
+      setSearchResults(null);
+      setSearchLoading(false);
+      return;
+    }
+
     setSearchLoading(true);
 
     searchTimeout.current = setTimeout(async () => {
       try {
-        const params = new URLSearchParams({ q: query, page: String(page) });
+        const params = new URLSearchParams({ q: query.trim(), page: String(page) });
         if (activeGenre) params.append('genre', activeGenre);
         const res = await fetch(`/api/v1/search?${params}`);
         const json = await res.json();
@@ -653,7 +672,7 @@ export default function BrowseContent() {
             <div className="relative rounded-3xl overflow-hidden mb-8 h-64 sm:h-80 md:h-96 group">
               {featured.cover && (
                 <img
-                  src={featured.cover?.large || featured.cover}
+                  src={featured.cover?.large || featured.cover?.small || featured.cover}
                   alt=""
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -665,7 +684,7 @@ export default function BrowseContent() {
                   <span className="px-2.5 py-1 bg-secondary text-white text-[10px] font-bold uppercase tracking-wider rounded-md">Featured</span>
                   {featured.rating && (
                     <span className="px-2.5 py-1 bg-black/40 backdrop-blur-md text-white text-[10px] font-bold rounded-md flex items-center gap-1 border border-white/10">
-                      <IconStarFilled size={10} className="text-yellow-400" /> {featured.rating}
+                      <IconStarFilled size={10} className="text-yellow-400" /> {formatRating(featured.rating)}
                     </span>
                   )}
                 </div>
@@ -915,7 +934,7 @@ export default function BrowseContent() {
                       {s.rating && (
                         <span className="inline-flex items-center gap-0.5 text-[11px] font-bold text-yellow-600">
                           <IconStarFilled size={10} className="text-yellow-500" />
-                          {s.rating}
+                          {formatRating(s.rating)}
                         </span>
                       )}
                     </div>
