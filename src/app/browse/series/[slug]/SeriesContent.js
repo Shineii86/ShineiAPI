@@ -13,6 +13,7 @@ import {
   IconArrowLeft, IconStarFilled, IconBook, IconGithub,
   IconHeart, IconChevronDown, IconX, IconExternalLink,
 } from '@/components/icons';
+import { cleanSynopsis } from '@/lib/text';
 
 const API = '/api/v1';
 
@@ -178,7 +179,7 @@ export default function SeriesContent({ slug }) {
                   {/* Synopsis */}
                   {series.synopsis && (
                     <p className="text-sm text-gray-600 leading-relaxed mt-5 max-w-xl">
-                      {series.synopsis}
+                      {cleanSynopsis(series.synopsis)}
                     </p>
                   )}
 

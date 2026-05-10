@@ -6,6 +6,7 @@
  */
 
 import SeriesContent from './SeriesContent';
+import { cleanMetaDescription } from '@/lib/text';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -18,15 +19,16 @@ export async function generateMetadata({ params }) {
     const json = await res.json();
     if (json.success) {
       const s = json.data;
+      const desc = cleanMetaDescription(s.synopsis) || `Read ${s.title} — ${s.chapters_count || 0} chapters, rated ${s.rating || 'N/A'}. Powered by ShineiAPI.`;
       const genreNames = s.genres?.map(g => g.name || g).join(',') || '';
       const ogUrl = `${baseUrl}/api/og?variant=series&title=${encodeURIComponent(s.title)}&rating=${s.rating || ''}&status=${s.status || ''}&type=${s.type || ''}&chapters=${s.chapters_count || ''}&genres=${encodeURIComponent(genreNames)}`;
 
       return {
         title: s.title,
-        description: s.synopsis?.slice(0, 160) || `Read ${s.title} — ${s.chapters_count || 0} chapters, rated ${s.rating || 'N/A'}. Powered by ShineiAPI.`,
+        description: desc,
         openGraph: {
           title: `${s.title} | ShineiAPI`,
-          description: s.synopsis?.slice(0, 160),
+          description: desc,
           images: [
             { url: ogUrl, width: 1200, height: 630, alt: s.title },
           ],
@@ -34,7 +36,7 @@ export async function generateMetadata({ params }) {
         twitter: {
           card: 'summary_large_image',
           title: `${s.title} | ShineiAPI`,
-          description: s.synopsis?.slice(0, 160),
+          description: desc,
           images: [ogUrl],
         },
       };

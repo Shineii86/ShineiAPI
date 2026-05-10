@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🐛 Bug Fixes
 - **Duplicate `style` attribute on EndpointRow** — The component had two `style` props; the second overrode the first, losing border radius, border, and shadow styles. Merged into one.
 - **Duplicate chapter date rendering** — `SeriesContent.js` rendered `ch.published_at` twice per chapter row. Removed the duplicate.
+- **Raw markdown in synopsis** — Upstream Toraka data contains markdown links (`[text](url)`), bold (`**text**`), and other formatting that displayed as broken text. Created `src/lib/text.js` with `cleanSynopsis()` sanitizer. Applied to all synopsis displays: series detail page, browse modal, featured banner, and meta descriptions.
 
 ## [2.0.2] - 2026-05-10
 

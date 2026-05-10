@@ -17,6 +17,7 @@ import {
   IconChevronDown, IconCode,
 } from '@/components/icons';
 import Pagination from '@/components/Pagination';
+import { cleanSynopsis } from '@/lib/text';
 
 /* ═══════════════════════════════════════════════════════
    API Helpers
@@ -356,7 +357,7 @@ function SeriesDetail({ slug, onClose }) {
               {series.synopsis && (
                 <div className="mt-6">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Synopsis</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{series.synopsis}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">{cleanSynopsis(series.synopsis)}</p>
                 </div>
               )}
 
@@ -719,7 +720,7 @@ export default function BrowseContent() {
                 </h2>
                 {featured.synopsis && (
                   <p className="text-white/70 text-sm max-w-md mt-3 line-clamp-2 leading-relaxed">
-                    {featured.synopsis}
+                    {cleanSynopsis(featured.synopsis, { maxLen: 200 })}
                   </p>
                 )}
                 <div className="flex items-center gap-3 mt-5">
