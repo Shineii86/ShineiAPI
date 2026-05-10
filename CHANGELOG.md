@@ -5,6 +5,20 @@ All notable changes to ShineiAPI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.3] - 2026-05-11
+
+### ⚡ Performance Optimizations
+- **Dynamic imports for heavy components** — `ApiPlayground` is now lazy-loaded with `next/dynamic` on both the landing page and docs page. Only loads when scrolled into view, reducing initial JS bundle by ~300 lines of client code.
+- **Removed redundant Google Fonts** — Removed `<link>` tag loading 4 unused fonts (Acme, Lora, Playfair Display, Noto Serif JP). Only the 3 `next/font/google` fonts (Space Grotesk, Inter, JetBrains Mono) remain, which self-host during build.
+- **System serif fallback for logo** — Replaced external Noto Serif JP dependency with system CJK serif font stack (`Hiragino Mincho ProN`, `Yu Mincho`, `MS Mincho`, `SimSun`) for the `水` logo character.
+- **Removed duplicate SVG icon definitions** — `IconDatabase`, `IconZap`, `IconLayers`, `IconTerminal` were defined locally in `HomeContent.js` despite being exported from `icons.js`. `IconCode` was duplicated in `BrowseContent.js`. All now import from the shared icon library.
+- **Created shared Footer component** — Extracted `Footer.js` to eliminate copy-pasted footer code across pages.
+- **Fixed invalid client-side fetch option** — Removed `{ next: { revalidate: 60 } }` from `fetchJSON()` in `BrowseContent.js` — this Next.js server-only API had no effect in client components.
+
+### 🐛 Bug Fixes
+- **Duplicate `style` attribute on EndpointRow** — The component had two `style` props; the second overrode the first, losing border radius, border, and shadow styles. Merged into one.
+- **Duplicate chapter date rendering** — `SeriesContent.js` rendered `ch.published_at` twice per chapter row. Removed the duplicate.
+
 ## [2.0.2] - 2026-05-10
 
 ### 🐛 Bug Fixes

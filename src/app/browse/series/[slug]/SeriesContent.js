@@ -74,7 +74,7 @@ export default function SeriesContent({ slug }) {
       <nav className="fixed top-0 w-full z-50 nav-frosted-solid">
         <div className="max-w-containerWidth mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: '"Noto Serif JP", serif' }}>水</div>
+            <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: '"Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", "SimSun", serif' }}>水</div>
             <span className="text-lg font-bold font-display uppercase tracking-tight">ShineiAPI</span>
           </Link>
           <div className="hidden sm:flex items-center gap-1">
@@ -308,11 +308,6 @@ export default function SeriesContent({ slug }) {
                               </span>
                             )}
                           </div>
-                          {ch.published_at && (
-                            <span className="text-[11px] text-gray-400 font-medium shrink-0 ml-3">
-                              {new Date(ch.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                            </span>
-                          )}
                         </div>
                       ))}
                     </div>
@@ -339,7 +334,7 @@ export default function SeriesContent({ slug }) {
         <div className="max-w-containerWidth mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: '"Noto Serif JP", serif' }}>水</div>
+              <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: '"Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", "SimSun", serif' }}>水</div>
               <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>
               <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.2</span>
             </div>

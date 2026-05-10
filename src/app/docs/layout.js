@@ -93,7 +93,7 @@ export default function DocsLayout({ children }) {
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'nav-frosted-solid' : 'nav-frosted'}`}>
         <div className="max-w-containerWidth mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: '"Noto Serif JP", serif' }}>
+            <div className="w-9 h-9 bg-primary text-white flex items-center justify-center font-bold text-sm" style={{ borderRadius: 10, fontFamily: '"Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", "SimSun", serif' }}>
               水
             </div>
             <span className="text-lg font-bold font-display uppercase tracking-tight">ShineiAPI</span>
@@ -205,7 +205,7 @@ export default function DocsLayout({ children }) {
           <footer className="py-12 sm:py-16 px-4 sm:px-6 bg-primary text-white" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: '"Noto Serif JP", serif' }}>
+                <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: '"Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", "SimSun", serif' }}>
                   水
                 </div>
                 <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>

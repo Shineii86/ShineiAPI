@@ -9,15 +9,25 @@
  */
 
 import Link from 'next/link';
-import ApiPlayground from '@/components/ApiPlayground';
+import dynamic from 'next/dynamic';
 import LandingNav from '@/components/LandingNav';
 import { useState, useEffect, useRef } from 'react';
 import {
   IconBook, IconArrowRight, IconGithub, IconStarFilled,
   IconExternalLink, IconStar, IconCopy, IconCheck,
   IconCode, IconSparkles, IconHeart,
+  IconDatabase, IconZap, IconLayers, IconTerminal,
 } from '@/components/icons';
 import { features, endpoints, stats, recipes } from './page.data';
+
+const ApiPlayground = dynamic(() => import('@/components/ApiPlayground'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-80 bg-primary/5 animate-pulse rounded-2xl flex items-center justify-center">
+      <span className="text-sm text-gray-400 font-mono">Loading Playground...</span>
+    </div>
+  ),
+});
 
 /* ─── Intersection Observer Hook ─── */
 
@@ -147,8 +157,7 @@ function EndpointRow({ ep, index }) {
     <div
       ref={ref}
       className={`flex flex-col sm:flex-row sm:items-center gap-3 p-4 bg-surface-bright hover:shadow-brutal hover:-translate-y-0.5 transition-all duration-200 group ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'}`}
-      style={{ borderRadius: 12, border: '1px solid rgba(0,0,0,0.06)', boxShadow: 'var(--shadow-sm)' }}
-      style={{ transitionDelay: `${index * 50}ms` }}
+      style={{ borderRadius: 12, border: '1px solid rgba(0,0,0,0.06)', boxShadow: 'var(--shadow-sm)', transitionDelay: `${index * 50}ms` }}
     >
       <span className="method-get w-fit">{ep.method}</span>
       <code className="text-sm font-mono flex-1 font-medium">{ep.path}</code>
@@ -557,7 +566,7 @@ export default function HomeContent() {
         <div className="max-w-containerWidth mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: '"Noto Serif JP", serif' }}>
+              <div className="w-8 h-8 bg-accent text-primary flex items-center justify-center font-bold text-sm" style={{ borderRadius: 8, fontFamily: '"Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", "SimSun", serif' }}>
                 水
               </div>
               <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>
@@ -583,35 +592,4 @@ export default function HomeContent() {
   );
 }
 
-/* ─── Unused but available for architecture section ─── */
-function IconDatabase(props) {
-  return (
-    <svg width={props.size || 20} height={props.size || 20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={props.className || ''}>
-      <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>
-    </svg>
-  );
-}
 
-function IconZap(props) {
-  return (
-    <svg width={props.size || 20} height={props.size || 20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={props.className || ''}>
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-    </svg>
-  );
-}
-
-function IconLayers(props) {
-  return (
-    <svg width={props.size || 20} height={props.size || 20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={props.className || ''}>
-      <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
-    </svg>
-  );
-}
-
-function IconTerminal(props) {
-  return (
-    <svg width={props.size || 20} height={props.size || 20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={props.className || ''}>
-      <polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/>
-    </svg>
-  );
-}

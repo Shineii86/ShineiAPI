@@ -7,7 +7,7 @@
  */
 
 import Link from 'next/link';
-import ApiPlayground from '@/components/ApiPlayground';
+import dynamic from 'next/dynamic';
 import {
   IconGlobe, IconFileText, IconBook, IconList, IconSearch,
   IconShuffle, IconTrophy, IconCalendar, IconTag, IconClock,
@@ -15,6 +15,15 @@ import {
   IconGithub, IconStarFilled, IconCode, IconShield, IconLayers,
   IconLock,
 } from '@/components/icons';
+
+const ApiPlayground = dynamic(() => import('@/components/ApiPlayground'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-80 bg-primary/5 animate-pulse rounded-2xl flex items-center justify-center">
+      <span className="text-sm text-gray-400 font-mono">Loading Playground...</span>
+    </div>
+  ),
+});
 
 /* ─── Reusable Components ─── */
 
