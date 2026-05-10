@@ -6,7 +6,7 @@
 
 # 水 ShineiAPI
 
-### ⚡ The Fastest Free Manga API Built on Toraka
+### The Fastest Free Manga API Built on Toraka
 
 **A free, open-source REST API for manga, manhwa, and webtoon data — no authentication required.**
 
