@@ -1,6 +1,6 @@
 /*
  * ╔════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.2                                    ║
+ * ║  SHINEIAPI v2.0.3                                    ║
  * ║  Support — Neo-Brutalist                             ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚════════════════════════════════════════╝

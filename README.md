@@ -16,7 +16,7 @@ Built as a middleware layer on top of the [Toraka](https://toraka.com) API with 
 
 <a href="https://shineiapi.vercel.app/docs"><img src="https://img.shields.io/badge/Documentation-Live-1a1a1a?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Documentation" /></a>
 <a href="https://shineiapi.vercel.app/api/v1/health"><img src="https://img.shields.io/badge/💚_Health_Check-Live-22c55e?style=for-the-badge&logo=cloud&logoColor=white" alt="Health" /></a>
-<a href="https://shineiapi.vercel.app/openapi.yaml"><img src="https://img.shields.io/badge/OpenAPI_Spec-v2.0.2-ea580c?style=for-the-badge&logo=openapiinitiative&logoColor=white" alt="OpenAPI" /></a>
+<a href="https://shineiapi.vercel.app/openapi.yaml"><img src="https://img.shields.io/badge/OpenAPI_Spec-v2.0.3-ea580c?style=for-the-badge&logo=openapiinitiative&logoColor=white" alt="OpenAPI" /></a>
 
 <br /><br />
 
@@ -138,6 +138,8 @@ Whether you're building a manga reader app, a recommendation engine, a tracking 
 | 📜 **Terms & Privacy** | Full Terms of Service and Privacy Policy pages included |
 | 🎨 **Neo-Brutalist × Apple UI** | Bold personality with Apple polish — frosted glass nav, soft layered shadows, spring animations, pill badges, warm cream palette |
 | 🔍 **Docs Search** | ⌘K searchable modal with keyboard navigation across all endpoints and features |
+| 🏎️ **Performance Optimized** | Dynamic imports for heavy components, self-hosted fonts via `next/font`, shared component library, zero redundant code |
+| 📜 **Infinite Marquee** | Seamless looping keyword banner on landing page — pauses on hover, responsive on mobile |
 
 ---
 
@@ -508,7 +510,7 @@ curl https://shineiapi.vercel.app/api/v1/health
   "success": true,
   "data": {
     "status": "healthy",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "checks": {
       "api": "healthy",
@@ -551,7 +553,7 @@ curl https://shineiapi.vercel.app/api/v1/stats
   "success": true,
   "data": {
     "name": "ShineiAPI",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "cache": {
       "entries": 42,
@@ -715,11 +717,11 @@ Responses include Vercel's CDN cache headers (`Cache-Control: s-maxage=300`), so
 | Header | Value | Description |
 |--------|-------|-------------|
 | `Content-Type` | `application/json` | Response format |
-| `X-Powered-By` | `ShineiAPI v2.0.2` | API identifier |
+| `X-Powered-By` | `ShineiAPI v2.0.3` | API identifier |
 | `X-RateLimit-Limit` | `60` | Max requests per window |
 | `X-RateLimit-Remaining` | `59` | Remaining requests |
 | `X-Request-ID` | `uuid` | Unique request ID |
-| `X-API-Version` | `2.0.2` | API version |
+| `X-API-Version | `2.0.3` | API version | API version |
 | `Access-Control-Allow-Origin` | `*` | CORS allowed origin |
 | `Cache-Control` | `public, s-maxage=300` | CDN cache directive |
 
@@ -1022,19 +1024,36 @@ ShineiAPI/
 │   │   │   │           └── route.js      # GET /api/v1/series/:slug/chapters
 │   │   │   ├── stats/route.js            # GET /api/v1/stats
 │   │   │   └── top/route.js              # GET /api/v1/top
+│   │   ├── browse/
+│   │   │   ├── BrowseContent.js          # Live browse page with search, trending, popular
+│   │   │   ├── page.js                   # Browse route
+│   │   │   ├── genres/
+│   │   │   │   ├── GenresContent.js      # Genre grid with color-coded cards
+│   │   │   │   └── page.js               # Genres route
+│   │   │   └── series/[slug]/
+│   │   │       ├── SeriesContent.js      # Deep-linkable series detail page
+│   │   │       └── page.js               # Series route with dynamic OG metadata
 │   │   ├── docs/
 │   │   │   ├── layout.js                 # Docs layout with sidebar
 │   │   │   └── page.js                   # Full API documentation
+│   │   ├── terms/page.js                 # Terms of Service
+│   │   ├── privacy/page.js               # Privacy Policy
+│   │   ├── support/page.js               # Support & FAQ page
+│   │   ├── not-found.js                  # Custom 404 page
+│   │   ├── error.js                      # Root error boundary
+│   │   ├── loading.js                    # Root loading state
 │   │   ├── globals.css                   # Design system (tokens, animations)
 │   │   ├── layout.js                     # Root layout with SEO metadata
 │   │   └── page.js                       # Landing page
 │   ├── components/
 │   │   ├── icons.js                      # SVG icon library (35+ icons)
 │   │   ├── ApiPlayground.js              # Live API testing playground
-│   │   ├── ThemeToggle.js                # Theme toggle (disabled, light-only)
-│   │   ├── ScrollProgress.js             # Scroll progress bar
 │   │   ├── BackToTop.js                  # Back-to-top floating button
-│   │   └── DocsSearch.js                 # ⌘K searchable docs modal
+│   │   ├── DocsSearch.js                 # ⌘K searchable docs modal
+│   │   ├── Footer.js                     # Shared footer component
+│   │   ├── LandingNav.js                 # Landing page frosted nav
+│   │   ├── LegalLayout.js               # Shared layout for ToS/Privacy/Support
+│   │   └── ScrollProgress.js             # Scroll progress bar
 │   ├── lib/
 │   │   ├── cache.js                      # In-memory cache with TTL
 │   │   ├── constants.js                  # Config, genres, types, statuses
@@ -1281,28 +1300,24 @@ Yes! The full OpenAPI 3.1 spec is available at [`/openapi.yaml`](https://shineia
 
 See [CHANGELOG.md](CHANGELOG.md) for a detailed version history.
 
-### Latest: v2.0.2 (2026-05-03)
+### Latest: v2.0.3 (2026-05-11)
+
+- **Infinite scroll marquee** — Seamless looping keyword banner on landing page (pauses on hover, responsive)
+- **Dynamic imports** — `ApiPlayground` lazy-loaded with `next/dynamic` on landing + docs pages
+- **Removed redundant fonts** — Eliminated 4 unused Google Fonts; kept only self-hosted `next/font` trio
+- **Deduplicated SVG icons** — Removed 5 local icon redefinitions, all import from shared `icons.js`
+- **Shared Footer component** — Extracted `Footer.js` to eliminate copy-pasted footers across all pages
+- **Bug fixes** — Duplicate `style` attribute on EndpointRow, duplicate chapter date rendering, invalid client-side fetch option
+
+### Previous: v2.0.2 (2026-05-10)
 
 - **`next/font` optimization** — Space Grotesk, Inter, JetBrains Mono loaded via next/font (zero layout shift, auto subsetting)
 - **Server Component split** — page.js is now a proper server component with metadata export for SEO
-- **Integrated unused components** — BackToTop, ScrollProgress, ThemeToggle now live in production
+- **Integrated unused components** — BackToTop, ScrollProgress now live in production
 - **Fixed observer leak** — Extracted useInView calls into dedicated sub-components (Reveal, StatItem, FeatureCard, EndpointRow)
 - **Relative API URLs** — ApiPlayground works in local dev, staging, and production
-- **Error page navigation** — Root and docs error pages use next/link instead of full page reload
-- **Removed duplicate config** — Deleted next.config.js, kept next.config.mjs
-- **Version sync** — All 31 source files, constants, middleware, OpenAPI spec, and README updated to v2.0.2
-- **iOS/macOS polish** — Frosted glass nav (blur + saturate), soft layered shadows, spring-physics animations, Apple system font stack, pill-shaped badges, rounded corners (12–16px), refined scrollbar and focus rings. No dark mode.
-- Neo-brutalist redesign with warm cream palette, bold black borders, and brutal shadows
-- Live API Playground for interactive endpoint testing with JSON preview
-- Terms of Service and Privacy Policy pages
-- Cinematic docs page with matching background, active section tracking, gradient dividers
-- ⌘K docs search modal with keyboard navigation
-- Light-only theme (dark mode removed)
-- Scroll progress bar, back-to-top button, custom 404 page
-- JSON-LD structured data for Google rich results
-- Font optimization (subset weights)
-- Full-screen hero with oversized typography and animated stat counters
-- 10 API endpoints, OpenAPI 3.1 spec, X-Request-ID header
+- **Version sync** — All source files synced to v2.0.2
+- **iOS/macOS polish** — Frosted glass nav, soft layered shadows, spring-physics animations, Apple system font stack
 
 ---
 

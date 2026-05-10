@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.2                                    ║
+ * ║  SHINEIAPI v2.0.3                                    ║
  * ║  Landing Page — Server Component (metadata)          ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝

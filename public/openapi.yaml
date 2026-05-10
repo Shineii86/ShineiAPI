@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: ShineiAPI
-  version: 2.0.2
+  version: 2.0.3
   description: |
     A free, open-source REST API for manga, manhwa, and webtoon data.
     Built on the Toraka API with caching, rate limiting, and data normalization.

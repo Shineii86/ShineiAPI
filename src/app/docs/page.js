@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.2                                    ║
+ * ║  SHINEIAPI v2.0.3                                    ║
  * ║  API Documentation — Neo-Brutalist                   ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -123,7 +123,7 @@ export default function DocsPage() {
       <div className="mb-16 pt-4">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-accent border-4 border-primary shadow-brutal-sm text-xs font-bold font-mono uppercase tracking-wider">
           <IconStarFilled size={12} />
-          v2.0.2
+          v2.0.3
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold uppercase mb-6 font-display tracking-tight leading-tight">
           API Documentation

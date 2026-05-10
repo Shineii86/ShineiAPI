@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.2                                    ║
+ * ║  SHINEIAPI v2.0.3                                    ║
  * ║  Browse — Live Manhwa Website Showcase               ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝

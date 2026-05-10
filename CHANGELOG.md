@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.3] - 2026-05-11
 
+### 📝 Documentation
+- **README.md updated for v2.0.3** — Version badges, changelog section, project structure (added BrowseContent, GenresContent, SeriesContent, Footer, LandingNav, LegalLayout), Key Features table (marquee + performance), removed stale entries.
+
 ### ✨ New Features
 - **Infinite scroll marquee banner** — Added a seamless looping marquee between the hero and stats sections on the landing page. Displays 15 rotating keywords (Free API, No Authentication, Manga Data, CORS Enabled, etc.) with accent-colored dots. Pauses on hover. Responsive sizing for mobile. Inspired by neo-brutalist marquee patterns.
 

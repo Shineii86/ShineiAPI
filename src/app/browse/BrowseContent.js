@@ -2,7 +2,7 @@
 
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.2                                    ║
+ * ║  SHINEIAPI v2.0.3                                    ║
  * ║  Browse Content — Live Manhwa Website Showcase       ║
  * ║  Powered by ShineiAPI                                ║
  * ╚══════════════════════════════════════════════════════╝
@@ -1001,7 +1001,7 @@ export default function BrowseContent() {
                 水
               </div>
               <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>
-              <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.2</span>
+              <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.3</span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
               <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">GitHub</a>
