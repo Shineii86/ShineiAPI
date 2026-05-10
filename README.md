@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/banner.png" alt="ShineiAPI — Free Manga & Manhwa REST API" width="100%" />
+<img src="public/cover.jpg" alt="ShineiAPI — Free Manga & Manhwa REST API" width="100%" />
 
 <br />
 
@@ -18,7 +18,7 @@ Built as a middleware layer on top of the [Toraka](https://toraka.com) API with 
 <a href="https://shineiapi.vercel.app/api/v1/health"><img src="https://img.shields.io/badge/💚_Health_Check-Live-22c55e?style=for-the-badge&logo=cloud&logoColor=white" alt="Health" /></a>
 <a href="https://shineiapi.vercel.app/openapi.yaml"><img src="https://img.shields.io/badge/OpenAPI_Spec-v2.0.3-ea580c?style=for-the-badge&logo=openapiinitiative&logoColor=white" alt="OpenAPI" /></a>
 
-<br /><br />
+<br />
 
 <a href="https://github.com/Shineii86/ShineiAPI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Shineii86/ShineiAPI?style=flat-square&color=0ea5e9" alt="License" /></a>
 <a href="https://github.com/Shineii86/ShineiAPI/stargazers"><img src="https://img.shields.io/github/stars/Shineii86/ShineiAPI?style=flat-square&color=fbbf24" alt="Stars" /></a>
