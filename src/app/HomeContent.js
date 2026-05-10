@@ -29,6 +29,33 @@ const ApiPlayground = dynamic(() => import('@/components/ApiPlayground'), {
   ),
 });
 
+/* ─── Marquee — Infinite Scroll Banner ─── */
+
+const MARQUEE_ITEMS = [
+  'Free API', 'No Authentication', 'Manga Data', 'Manhwa & Webtoon',
+  'CORS Enabled', 'REST API', 'Sub-Second Responses', 'Rate Limiting',
+  'Open Source', 'MIT Licensed', 'Toraka Powered', 'JSON Responses',
+  'Full-Text Search', 'Series Metadata', 'Chapter Tracking',
+];
+
+function Marquee() {
+  const items = MARQUEE_ITEMS.map((text, i) => (
+    <span key={i} className="marquee-item">
+      <span className="marquee-dot" />
+      {text}
+    </span>
+  ));
+
+  return (
+    <div className="marquee-wrapper">
+      <div className="marquee-track">
+        {items}
+        {items}
+      </div>
+    </div>
+  );
+}
+
 /* ─── Intersection Observer Hook ─── */
 
 function useInView(options = {}) {
@@ -273,6 +300,11 @@ export default function HomeContent() {
           </Reveal>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════
+          MARQUEE
+          ═══════════════════════════════════════════════════ */}
+      <Marquee />
 
       {/* ═══════════════════════════════════════════════════
           STATS BAR

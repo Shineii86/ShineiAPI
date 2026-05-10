@@ -66,6 +66,59 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════
+   Marquee — Infinite Scroll Banner
+   ═══════════════════════════════════════════════════════ */
+.marquee-wrapper {
+  overflow: hidden;
+  background: rgb(var(--primary));
+  color: white;
+  padding: 14px 0;
+  border-top: 2px solid rgba(255,255,255,0.08);
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee-item {
+  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 28px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.marquee-dot {
+  width: 8px;
+  height: 8px;
+  background: rgb(var(--accent));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .marquee-item {
+    font-size: 14px;
+    padding: 0 18px;
+    gap: 10px;
+  }
+  .marquee-wrapper {
+    padding: 10px 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
    Scrollbar — Refined
    ═══════════════════════════════════════════════════════ */
 ::-webkit-scrollbar { width: 8px; height: 8px; }

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.3] - 2026-05-11
 
+### ✨ New Features
+- **Infinite scroll marquee banner** — Added a seamless looping marquee between the hero and stats sections on the landing page. Displays 15 rotating keywords (Free API, No Authentication, Manga Data, CORS Enabled, etc.) with accent-colored dots. Pauses on hover. Responsive sizing for mobile. Inspired by neo-brutalist marquee patterns.
+
 ### ⚡ Performance Optimizations
 - **Dynamic imports for heavy components** — `ApiPlayground` is now lazy-loaded with `next/dynamic` on both the landing page and docs page. Only loads when scrolled into view, reducing initial JS bundle by ~300 lines of client code.
 - **Removed redundant Google Fonts** — Removed `<link>` tag loading 4 unused fonts (Acme, Lora, Playfair Display, Noto Serif JP). Only the 3 `next/font/google` fonts (Space Grotesk, Inter, JetBrains Mono) remain, which self-host during build.
