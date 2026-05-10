@@ -97,6 +97,137 @@
   color: rgb(var(--primary));
 }
 
+/* ── Dark mode text overrides ── */
+[data-theme="dark"] .text-gray-600 { color: #b0aaa3; }
+[data-theme="dark"] .text-gray-500 { color: #9a9590; }
+[data-theme="dark"] .text-gray-400 { color: #858078; }
+
+/* ── Dark mode background overrides ── */
+[data-theme="dark"] .bg-gray-100 { background: #2a2a2a; }
+[data-theme="dark"] .bg-gray-800\/10 { background: rgba(30, 30, 30, 0.3); }
+[data-theme="dark"] .text-gray-800 { color: #d4cfc8; }
+[data-theme="dark"] .bg-primary\/5 { background: rgba(245, 240, 232, 0.06); }
+[data-theme="dark"] .bg-primary\/\[0\.02\] { background: rgba(245, 240, 232, 0.03); }
+[data-theme="dark"] .bg-surface-dim { background: #1a1a1a; }
+[data-theme="dark"] .bg-surface-bright { background: #1e1e1e; }
+[data-theme="dark"] .bg-surface { background: #141414; }
+
+/* ── Dark mode border overrides ── */
+[data-theme="dark"] .border-primary\/8 { border-color: rgba(245, 240, 232, 0.1); }
+[data-theme="dark"] .border-primary\/5 { border-color: rgba(245, 240, 232, 0.07); }
+[data-theme="dark"] .border-primary\/10 { border-color: rgba(245, 240, 232, 0.12); }
+[data-theme="dark"] .border-gray-200 { border-color: #333; }
+
+/* ── Dark mode code blocks ── */
+[data-theme="dark"] .code-brutal-header { background: rgba(255,255,255,0.04); }
+
+/* ── Dark mode form elements ── */
+[data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea {
+  background: var(--bg-bright);
+  color: var(--text);
+  border-color: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] input:focus, [data-theme="dark"] select:focus {
+  border-color: rgb(var(--tertiary) / 0.5);
+}
+
+/* ── Dark mode skeleton loaders ── */
+[data-theme="dark"] .animate-pulse.bg-primary\/5 {
+  background: rgba(245, 240, 232, 0.06);
+}
+
+/* ── Dark mode: bg-primary (inverted) used for footers, headers, CTAs ── */
+[data-theme="dark"] footer.bg-primary,
+[data-theme="dark"] .bg-primary.text-white {
+  background: #0a0a0a;
+}
+[data-theme="dark"] footer.bg-primary .text-accent,
+[data-theme="dark"] .bg-primary.text-white .text-accent {
+  color: rgb(var(--accent));
+}
+[data-theme="dark"] footer.bg-primary .text-white\/40,
+[data-theme="dark"] .bg-primary.text-white .text-white\/40 {
+  color: rgba(255,255,255,0.4);
+}
+[data-theme="dark"] footer.bg-primary .text-white\/50,
+[data-theme="dark"] .bg-primary.text-white .text-white\/50 {
+  color: rgba(255,255,255,0.5);
+}
+[data-theme="dark"] footer.bg-primary .text-white\/70,
+[data-theme="dark"] .bg-primary.text-white .text-white\/70 {
+  color: rgba(255,255,255,0.7);
+}
+[data-theme="dark"] footer.bg-primary .text-white\/30,
+[data-theme="dark"] .bg-primary.text-white .text-white\/30 {
+  color: rgba(255,255,255,0.3);
+}
+[data-theme="dark"] footer.bg-primary .bg-accent {
+  background: rgb(var(--accent));
+}
+[data-theme="dark"] footer.bg-primary .bg-accent.text-primary {
+  color: #0a0a0a;
+}
+
+/* ── Dark mode: code-brutal header ── */
+[data-theme="dark"] .code-brutal .code-brutal-header {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* ── Dark mode: btn-brutal on dark bg sections ── */
+[data-theme="dark"] footer .btn-brutal,
+[data-theme="dark"] .bg-primary.text-white .btn-brutal {
+  background: rgb(var(--accent));
+  color: #0a0a0a;
+  border-color: rgba(255,255,255,0.3);
+}
+[data-theme="dark"] footer .btn-brutal:hover,
+[data-theme="dark"] .bg-primary.text-white .btn-brutal:hover {
+  background: #fde047;
+  color: #0a0a0a;
+}
+
+/* ── Dark mode: section CTA banners ── */
+[data-theme="dark"] .bg-primary.text-white.border-4 {
+  background: #0a0a0a;
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* ── Dark mode: nav logo icons ── */
+[data-theme="dark"] .nav-frosted .bg-primary.text-white,
+[data-theme="dark"] .nav-frosted-solid .bg-primary.text-white,
+[data-theme="dark"] nav .bg-primary.text-white {
+  background: #f5f0e8;
+  color: #0a0a0a;
+}
+
+/* ── Dark mode: search input ── */
+[data-theme="dark"] .bg-surface-bright.border-2 {
+  background: #1e1e1e;
+  border-color: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] .bg-surface-bright.border-2:focus-within {
+  border-color: rgb(var(--tertiary) / 0.5);
+}
+
+/* ── Dark mode: genre pill buttons ── */
+[data-theme="dark"] .bg-surface-bright.text-gray-600 {
+  background: #1e1e1e;
+  color: #b0aaa3;
+}
+[data-theme="dark"] .bg-accent\/80 {
+  background: rgba(255, 204, 0, 0.15);
+}
+
+/* ── Dark mode: info cards ── */
+[data-theme="dark"] .bg-accent\/15 { background: rgba(255, 204, 0, 0.1); }
+[data-theme="dark"] .bg-accent\/20 { background: rgba(255, 204, 0, 0.12); }
+[data-theme="dark"] .bg-accent\/10 { background: rgba(255, 204, 0, 0.08); }
+
+/* ── Dark mode: method badges ── */
+[data-theme="dark"] .method-get { background: rgba(74, 222, 128, 0.15); }
+[data-theme="dark"] .method-badge { border-color: currentColor; }
+
 /* ═══════════════════════════════════════════════════════
    Base Reset
    ═══════════════════════════════════════════════════════ */
