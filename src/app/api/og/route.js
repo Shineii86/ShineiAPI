@@ -15,12 +15,11 @@ const BG = '#f5f0e8';
 const PRIMARY = '#1a1a1a';
 const ACCENT = '#ffcc00';
 const SECONDARY = '#e63b2e';
-const MUTED = '#6b6560';
 
-/* ─── Fetch font (Inter Bold) ─── */
+/* ─── Fetch font (Inter Bold TTF) ─── */
 const fontPromise = fetch(
-  new URL('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2')
-).then(r => r.arrayBuffer());
+  new URL('https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Bold.woff')
+).then(r => r.arrayBuffer()).catch(() => null);
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -33,6 +32,7 @@ export async function GET(request) {
   const variant = searchParams.get('variant') || 'series'; // 'series' | 'default'
 
   const font = await fontPromise;
+  const fontConfig = font ? [{ name: 'Inter', data: font, style: 'normal', weight: 700 }] : [];
 
   if (variant === 'default') {
     return new ImageResponse(
@@ -79,7 +79,7 @@ export async function GET(request) {
           </div>
         </div>
       ),
-      { width: 1200, height: 630, fonts: [{ name: 'Inter', data: font, style: 'normal', weight: 700 }] }
+      { width: 1200, height: 630, fonts: fontConfig }
     );
   }
 
@@ -176,6 +176,6 @@ export async function GET(request) {
         </div>
       </div>
     ),
-    { width: 1200, height: 630, fonts: [{ name: 'Inter', data: font, style: 'normal', weight: 700 }] }
+    { width: 1200, height: 630, fonts: fontConfig }
   );
 }
