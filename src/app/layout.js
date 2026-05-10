@@ -10,7 +10,6 @@ import './globals.css';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import BackToTop from '@/components/BackToTop';
 import ScrollProgress from '@/components/ScrollProgress';
-import ThemeToggle from '@/components/ThemeToggle';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -38,10 +37,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: 'cover',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f5f0e8' },
-    { media: '(prefers-color-scheme: dark)', color: '#141414' },
-  ],
+  themeColor: '#f5f0e8',
 };
 
 export const metadata = {
@@ -109,11 +105,6 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Acme&family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Serif+JP:wght@200..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
         <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t)}else if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark')}}catch(e){}})()`,
-          }}
-        />
-        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -135,11 +126,6 @@ export default function RootLayout({ children }) {
         <ScrollProgress />
         {children}
         <BackToTop />
-        <div className="fixed bottom-6 right-6 z-50">
-          <div className="bg-surface-bright/90 backdrop-blur-md border border-primary/10 rounded-xl shadow-brutal">
-            <ThemeToggle />
-          </div>
-        </div>
       </body>
     </html>
   );
