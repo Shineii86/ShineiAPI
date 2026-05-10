@@ -168,7 +168,7 @@ export default function GenresContent() {
   const loadSeries = useCallback(async (genre, p = 1) => {
     setSeriesLoading(true);
     try {
-      const res = await fetch(`${API}/search?q=a&genre=${genre}&page=${p}`);
+      const res = await fetch(`${API}/series?genre=${genre}&page=${p}`);
       const json = await res.json();
       if (json.success) {
         if (p === 1) setSeries(json.data);
