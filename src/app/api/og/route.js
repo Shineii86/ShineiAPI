@@ -16,10 +16,10 @@ const PRIMARY = '#1a1a1a';
 const ACCENT = '#ffcc00';
 const SECONDARY = '#e63b2e';
 
-/* ─── Fetch font (Inter Bold TTF) ─── */
+/* ─── Fetch font (Inter Bold) — skip if unavailable ─── */
 const fontPromise = fetch(
-  new URL('https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Bold.woff')
-).then(r => r.arrayBuffer()).catch(() => null);
+  'https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-700-normal.woff'
+).then(r => r.ok ? r.arrayBuffer() : null).catch(() => null);
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
