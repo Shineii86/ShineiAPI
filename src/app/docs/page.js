@@ -597,7 +597,7 @@ curl "https://shineiapi.vercel.app/api/v1/search?q=solo&genre=action&type=manhwa
   "success": true,
   "data": {
     "status": "healthy",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "checks": {
       "api": "healthy",
@@ -634,12 +634,25 @@ curl "https://shineiapi.vercel.app/api/v1/search?q=solo&genre=action&type=manhwa
   "success": true,
   "data": {
     "name": "ShineiAPI",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "Free manga, manhwa, and webtoon REST API",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "cache": { "entries": 42, "hits": 1520, "misses": 418 },
     "endpoints": 10,
     "rate_limit": { "max_requests": 60, "window": "60s", "scope": "per IP" },
+    "analytics": {
+      "total_requests": 12450,
+      "top_endpoints": [
+        { "path": "/api/v1/search", "count": 4200 },
+        { "path": "/api/v1/series/{slug}", "count": 3100 }
+      ],
+      "top_queries": [
+        { "query": "solo leveling", "count": 890 },
+        { "query": "nano machine", "count": 420 }
+      ],
+      "errors": { "404": 45, "429": 12 },
+      "response_times": { "avg_ms": 85, "max_ms": 1200, "count": 12450 }
+    },
     "data_source": "Toraka (toraka.com)",
     "documentation": "https://shineiapi.vercel.app/docs",
     "repository": "https://github.com/Shineii86/ShineiAPI",

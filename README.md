@@ -140,6 +140,10 @@ Whether you're building a manga reader app, a recommendation engine, a tracking 
 | 🔍 **Docs Search** | ⌘K searchable modal with keyboard navigation across all endpoints and features |
 | 🏎️ **Performance Optimized** | Dynamic imports for heavy components, self-hosted fonts via `next/font`, shared component library, zero redundant code |
 | 📜 **Infinite Marquee** | Seamless looping keyword banner on landing page — pauses on hover, responsive on mobile |
+| 🖼️ **Dynamic OG Images** | Series pages generate rich social preview cards via `/api/og` — title, rating, status, chapters, genres in branded layout |
+| 🔮 **Search Autocomplete** | Typeahead suggestions in browse search with cover art, ratings, and instant series preview |
+| 📊 **API Analytics** | Endpoint usage, top queries, error rates, and response times tracked in-memory — view via `/api/v1/stats` |
+| 📄 **Smart Pagination** | Numbered page navigation with ellipsis, active states, and page info |
 
 ---
 
@@ -562,7 +566,19 @@ curl https://shineiapi.vercel.app/api/v1/stats
       "misses": 418
     },
     "endpoints": 10,
-    "rate_limit": { "max_requests": 60, "window": "60s" }
+    "rate_limit": { "max_requests": 60, "window": "60s" },
+    "analytics": {
+      "total_requests": 12450,
+      "top_endpoints": [
+        { "path": "/api/v1/search", "count": 4200 },
+        { "path": "/api/v1/series/{slug}", "count": 3100 }
+      ],
+      "top_queries": [
+        { "query": "solo leveling", "count": 890 }
+      ],
+      "errors": { "404": 45, "429": 12 },
+      "response_times": { "avg_ms": 85, "max_ms": 1200 }
+    }
   }
 }
 ```
@@ -1009,7 +1025,9 @@ ShineiAPI/
 │   └── screenshots/                      # Documentation screenshots
 ├── src/
 │   ├── app/
-│   │   ├── api/v1/
+│   │   ├── api/
+│   │   │   ├── og/route.js               # Dynamic OG image generation (@vercel/og)
+│   │   │   └── v1/
 │   │   │   ├── genres/route.js           # GET /api/v1/genres
 │   │   │   ├── health/route.js           # GET /api/v1/health
 │   │   │   ├── popular/route.js          # GET /api/v1/popular
@@ -1053,8 +1071,10 @@ ShineiAPI/
 │   │   ├── Footer.js                     # Shared footer component
 │   │   ├── LandingNav.js                 # Landing page frosted nav
 │   │   ├── LegalLayout.js               # Shared layout for ToS/Privacy/Support
+│   │   ├── Pagination.js                # Numbered page navigation
 │   │   └── ScrollProgress.js             # Scroll progress bar
 │   ├── lib/
+│   │   ├── analytics.js                  # API usage analytics (endpoints, queries, errors)
 │   │   ├── cache.js                      # In-memory cache with TTL
 │   │   ├── constants.js                  # Config, genres, types, statuses
 │   │   ├── response.js                   # Standardized response builders

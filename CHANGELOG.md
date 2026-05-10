@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.3] - 2026-05-11
 
 ### 📝 Documentation
-- **README.md updated for v2.0.3** — Version badges, changelog section, project structure (added BrowseContent, GenresContent, SeriesContent, Footer, LandingNav, LegalLayout), Key Features table (marquee + performance), removed stale entries.
+- **README.md updated for v2.0.3** — Version badges, changelog section, project structure (added BrowseContent, GenresContent, SeriesContent, Footer, LandingNav, LegalLayout, Pagination, analytics.js, /api/og), Key Features table (marquee + performance + OG images + analytics + pagination), stats example with analytics section.
+- **Docs page JSON examples synced** — Health and Stats response examples now show v2.0.3 and include analytics section.
 
 ### 🔧 Infrastructure
 - **vercel.json version sync** — X-Powered-By header updated to v2.0.3
