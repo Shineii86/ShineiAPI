@@ -4,11 +4,18 @@
 User-agent: *
 Allow: /
 Allow: /docs
+Allow: /browse
+Allow: /browse/genres
 Allow: /api/v1/health
 Allow: /api/v1/stats
-
-# Disallow API endpoints from crawling (they're for programmatic use, not indexing)
-Disallow: /api/
+Disallow: /api/v1/search
+Disallow: /api/v1/series
+Disallow: /api/v1/popular
+Disallow: /api/v1/random
+Disallow: /api/v1/top
+Disallow: /api/v1/schedule
+Disallow: /api/v1/genres
+Disallow: /api/og
 
 # Sitemap
 Sitemap: https://shineiapi.vercel.app/sitemap.xml
