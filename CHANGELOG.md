@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.2] - 2026-05-10
 
+### ✨ Improvements
+- **Live Browse Page (`/browse`)** — Full manhwa-style browsing experience powered entirely by ShineiAPI endpoints. Features a hero banner with featured series, horizontally scrollable Popular and Trending rows, Top Rated grid with ranked cards, live search with debounce and genre filtering, and a detailed series modal with chapter list, metadata grid, genres, authors, artists, and official sources. Zero mock data — every section fetches from the API in real time.
+- **Browse link added to navigation** — Landing page nav (desktop + mobile) now includes a "Browse" link alongside Docs and GitHub.
+- **Sitemap updated** — Added `/browse` route with daily change frequency.
+
 ### 🐛 Bug Fixes
 - **Docs footer inconsistency** — The docs page footer (`/docs`) only had "GitHub" and "Home" links, while the landing page and legal pages (Terms, Privacy, Support) all had "GitHub", "License", "Terms", "Privacy", "Support". Updated the docs layout footer to match the rest of the site with all five navigation links.
 
