@@ -41,6 +41,63 @@
 }
 
 /* ═══════════════════════════════════════════════════════
+   Dark Theme
+   ═══════════════════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg: #141414;
+  --bg-dim: #1a1a1a;
+  --bg-bright: #1e1e1e;
+  --primary: 245 240 232;
+  --secondary: 230 59 46;
+  --tertiary: 96 165 250;
+  --accent: 255 204 0;
+  --text: #f5f0e8;
+  --text-muted: #9a9590;
+  --text-dim: #6b6560;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.3), 0 8px 32px rgba(0,0,0,0.3);
+  --shadow-xl: 0 8px 24px rgba(0,0,0,0.4), 0 16px 48px rgba(0,0,0,0.3);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .nav-frosted {
+  background: rgba(20, 20, 20, 0.78);
+}
+[data-theme="dark"] .nav-frosted-solid {
+  background: rgba(20, 20, 20, 0.92);
+}
+[data-theme="dark"] .card-brutal {
+  background: var(--bg-bright);
+  border-color: rgba(255,255,255,0.08);
+}
+[data-theme="dark"] .card-brutal:hover {
+  border-color: rgba(255,255,255,0.15);
+}
+[data-theme="dark"] .api-table thead th {
+  background: var(--bg-bright);
+  color: var(--text);
+}
+[data-theme="dark"] .sidebar-link.active {
+  background-color: color-mix(in srgb, rgb(var(--accent)) 12%, transparent);
+}
+[data-theme="dark"] .info-brutal {
+  background: var(--bg-bright);
+  border-color: rgba(255,255,255,0.08);
+}
+[data-theme="dark"] .pill-tag {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+}
+[data-theme="dark"] .code-brutal {
+  background: #0d0d0d;
+}
+[data-theme="dark"] ::selection {
+  background: rgb(var(--accent));
+  color: rgb(var(--primary));
+}
+
+/* ═══════════════════════════════════════════════════════
    Base Reset
    ═══════════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; }

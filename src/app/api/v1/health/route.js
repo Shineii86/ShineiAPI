@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Health check endpoint — GET /api/v1/health          ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝

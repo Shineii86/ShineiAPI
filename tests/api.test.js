@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  API Endpoint Tests                                  ║
  * ╚══════════════════════════════════════════════════════╝
  *
@@ -46,7 +46,7 @@ async function testHealth() {
     assert(status === 200, `Expected 200, got ${status}`);
     assert(data.success === true, 'Expected success: true');
     assert(data.data.status === 'healthy', `Expected healthy, got ${data.data.status}`);
-    assert(data.data.version === '2.0.1', 'Expected version 2.0.1');
+    assert(data.data.version === '2.0.2', 'Expected version 2.0.2');
   });
 }
 
@@ -200,7 +200,7 @@ async function testSlugNorm() {
 }
 
 async function run() {
-  console.log('>> ShineiAPI v2.0.1 — API Tests');
+  console.log('>> ShineiAPI v2.0.2 — API Tests');
   console.log(`   Base: ${BASE}\n`);
 
   await testHealth();

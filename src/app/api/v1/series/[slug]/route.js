@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Series detail endpoint — GET /api/v1/series/{slug}  ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝

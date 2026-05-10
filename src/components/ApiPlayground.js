@@ -2,7 +2,7 @@
 
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Live API Playground — Neo-Brutalist                 ║
  * ║  Interactive endpoint testing with JSON preview       ║
  * ╚══════════════════════════════════════════════════════╝

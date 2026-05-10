@@ -2,7 +2,7 @@
 
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Docs Layout — Frosted Glass Sidebar                 ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -24,6 +24,7 @@ const navSections = [
     title: 'Getting Started',
     items: [
       { label: 'Introduction',    href: '/docs',                  icon: IconArrowRight },
+      { label: 'Live Browse',     href: '/browse',                icon: IconBook },
       { label: 'API Playground',  href: '/docs#try-it',           icon: IconCode },
       { label: 'Base URL',        href: '/docs#base-url',         icon: IconGlobe },
       { label: 'Response Format', href: '/docs#response-format',  icon: IconFileText },
@@ -189,7 +190,7 @@ export default function DocsLayout({ children }) {
           </div>
 
           <div className="mt-4 px-3">
-            <span className="text-[10px] text-gray-400 font-mono">v2.0.1</span>
+            <span className="text-[10px] text-gray-400 font-mono">v2.0.2</span>
           </div>
         </aside>
 
@@ -208,7 +209,7 @@ export default function DocsLayout({ children }) {
                   水
                 </div>
                 <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>
-                <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.1</span>
+                <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.2</span>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
                 <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-semibold uppercase tracking-wider">GitHub</a>

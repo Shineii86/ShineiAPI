@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Unofficial Toraka REST API Wrapper                  ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -41,7 +41,7 @@ const RATE_LIMIT = {
 
 /* ─── API Response Metadata ─── */
 const API_META = {
-  VERSION: '2.0.1',
+  VERSION: '2.0.2',
   NAME: 'ShineiAPI',
   DESCRIPTION: 'Unofficial Toraka REST API Wrapper for Manga, Manhwa & Webtoons',
   AUTHOR: 'Shineii86',

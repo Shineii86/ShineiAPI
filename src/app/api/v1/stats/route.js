@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Stats Endpoint — Public API Statistics              ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -65,7 +65,7 @@ export async function GET(request) {
 
   return success({
     name: 'ShineiAPI',
-    version: '2.0.1',
+    version: '2.0.2',
     description: 'Free manga, manhwa, and webtoon REST API',
     uptime: {
       ms: uptimeMs,

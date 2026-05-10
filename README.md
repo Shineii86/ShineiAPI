@@ -16,7 +16,7 @@ Built as a middleware layer on top of the [Toraka](https://toraka.com) API with 
 
 <a href="https://shineiapi.vercel.app/docs"><img src="https://img.shields.io/badge/Documentation-Live-1a1a1a?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Documentation" /></a>
 <a href="https://shineiapi.vercel.app/api/v1/health"><img src="https://img.shields.io/badge/💚_Health_Check-Live-22c55e?style=for-the-badge&logo=cloud&logoColor=white" alt="Health" /></a>
-<a href="https://shineiapi.vercel.app/openapi.yaml"><img src="https://img.shields.io/badge/OpenAPI_Spec-v2.0.1-ea580c?style=for-the-badge&logo=openapiinitiative&logoColor=white" alt="OpenAPI" /></a>
+<a href="https://shineiapi.vercel.app/openapi.yaml"><img src="https://img.shields.io/badge/OpenAPI_Spec-v2.0.2-ea580c?style=for-the-badge&logo=openapiinitiative&logoColor=white" alt="OpenAPI" /></a>
 
 <br /><br />
 
@@ -508,7 +508,7 @@ curl https://shineiapi.vercel.app/api/v1/health
   "success": true,
   "data": {
     "status": "healthy",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "checks": {
       "api": "healthy",
@@ -551,7 +551,7 @@ curl https://shineiapi.vercel.app/api/v1/stats
   "success": true,
   "data": {
     "name": "ShineiAPI",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "cache": {
       "entries": 42,
@@ -715,11 +715,11 @@ Responses include Vercel's CDN cache headers (`Cache-Control: s-maxage=300`), so
 | Header | Value | Description |
 |--------|-------|-------------|
 | `Content-Type` | `application/json` | Response format |
-| `X-Powered-By` | `ShineiAPI v2.0.1` | API identifier |
+| `X-Powered-By` | `ShineiAPI v2.0.2` | API identifier |
 | `X-RateLimit-Limit` | `60` | Max requests per window |
 | `X-RateLimit-Remaining` | `59` | Remaining requests |
 | `X-Request-ID` | `uuid` | Unique request ID |
-| `X-API-Version` | `2.0.1` | API version |
+| `X-API-Version` | `2.0.2` | API version |
 | `Access-Control-Allow-Origin` | `*` | CORS allowed origin |
 | `Cache-Control` | `public, s-maxage=300` | CDN cache directive |
 
@@ -1281,7 +1281,7 @@ Yes! The full OpenAPI 3.1 spec is available at [`/openapi.yaml`](https://shineia
 
 See [CHANGELOG.md](CHANGELOG.md) for a detailed version history.
 
-### Latest: v2.0.1 (2026-05-03)
+### Latest: v2.0.2 (2026-05-03)
 
 - **`next/font` optimization** — Space Grotesk, Inter, JetBrains Mono loaded via next/font (zero layout shift, auto subsetting)
 - **Server Component split** — page.js is now a proper server component with metadata export for SEO
@@ -1290,7 +1290,7 @@ See [CHANGELOG.md](CHANGELOG.md) for a detailed version history.
 - **Relative API URLs** — ApiPlayground works in local dev, staging, and production
 - **Error page navigation** — Root and docs error pages use next/link instead of full page reload
 - **Removed duplicate config** — Deleted next.config.js, kept next.config.mjs
-- **Version sync** — All 31 source files, constants, middleware, OpenAPI spec, and README updated to v2.0.1
+- **Version sync** — All 31 source files, constants, middleware, OpenAPI spec, and README updated to v2.0.2
 - **iOS/macOS polish** — Frosted glass nav (blur + saturate), soft layered shadows, spring-physics animations, Apple system font stack, pill-shaped badges, rounded corners (12–16px), refined scrollbar and focus rings. No dark mode.
 - Neo-brutalist redesign with warm cream palette, bold black borders, and brutal shadows
 - Live API Playground for interactive endpoint testing with JSON preview

@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  API Documentation — Neo-Brutalist                   ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -114,7 +114,7 @@ export default function DocsPage() {
       <div className="mb-16 pt-4">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-accent border-4 border-primary shadow-brutal-sm text-xs font-bold font-mono uppercase tracking-wider">
           <IconStarFilled size={12} />
-          v2.0.1
+          v2.0.2
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold uppercase mb-6 font-display tracking-tight leading-tight">
           API Documentation
@@ -588,7 +588,7 @@ curl "https://shineiapi.vercel.app/api/v1/search?q=solo&genre=action&type=manhwa
   "success": true,
   "data": {
     "status": "healthy",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "checks": {
       "api": "healthy",
@@ -625,7 +625,7 @@ curl "https://shineiapi.vercel.app/api/v1/search?q=solo&genre=action&type=manhwa
   "success": true,
   "data": {
     "name": "ShineiAPI",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Free manga, manhwa, and webtoon REST API",
     "uptime": { "ms": 86400000, "human": "1d 0h 0m" },
     "cache": { "entries": 42, "hits": 1520, "misses": 418 },

@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Unofficial Toraka REST API Wrapper                  ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -187,7 +187,7 @@ export function middleware(request) {
     response.headers.set('X-RateLimit-Limit', String(RATE_LIMIT.MAX_REQUESTS));
     response.headers.set('X-RateLimit-Remaining', String(remaining));
     response.headers.set('X-Request-ID', requestId);
-    response.headers.set('X-Powered-By', 'ShineiAPI v2.0.1');
+    response.headers.set('X-Powered-By', 'ShineiAPI v2.0.2');
     response.headers.set('Access-Control-Allow-Origin', '*');
 
     return response;

@@ -119,7 +119,7 @@ Every API response includes:
 | `Referrer-Policy` | `strict-origin-when-cross-origin` | Controls referrer information |
 | `Access-Control-Allow-Origin` | `*` | CORS (public API) |
 | `Access-Control-Allow-Methods` | `GET, OPTIONS` | Only GET requests allowed |
-| `X-Powered-By` | `ShineiAPI v2.0.1` | API identification |
+| `X-Powered-By` | `ShineiAPI v2.0.2` | API identification |
 | `X-RateLimit-Limit` | `60` | Rate limit transparency |
 | `X-Request-ID` | `uuid` | Request tracing |
 

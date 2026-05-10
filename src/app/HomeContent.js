@@ -2,7 +2,7 @@
 
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Landing Page — Client Component (interactive)       ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -186,7 +186,7 @@ export default function HomeContent() {
           <Reveal>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 pill-tag text-xs font-bold font-mono uppercase tracking-wider">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              v2.0.1 — Live &amp; Free
+              v2.0.2 — Live &amp; Free
             </div>
           </Reveal>
 
@@ -214,6 +214,9 @@ export default function HomeContent() {
             <div className="flex flex-wrap items-center gap-4 mb-14">
               <Link href="/docs" className="btn-brutal">
                 View Documentation <IconArrowRight size={18} />
+              </Link>
+              <Link href="/browse" className="btn-brutal-outline">
+                <IconBook size={18} /> Explore Series
               </Link>
               <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="btn-brutal-outline">
                 <IconGithub size={18} /> Star on GitHub
@@ -537,6 +540,9 @@ export default function HomeContent() {
             <Link href="/docs" className="inline-flex items-center gap-2 px-6 py-3 font-bold text-sm uppercase tracking-wider bg-accent text-primary transition-all duration-200 hover:bg-yellow-300 hover:shadow-lg" style={{ borderRadius: 12, border: '2px solid rgba(255,255,255,0.3)' }}>
               Explore the API <IconArrowRight size={18} />
             </Link>
+            <Link href="/browse" className="inline-flex items-center gap-2 px-6 py-3 font-bold text-sm uppercase tracking-wider bg-transparent text-white hover:bg-white/10 transition-all duration-200" style={{ borderRadius: 12, border: '2px solid rgba(255,255,255,0.25)' }}>
+              <IconBook size={16} /> Browse Series
+            </Link>
             <a href="https://github.com/Shineii86/ShineiAPI/issues" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 font-bold text-sm uppercase tracking-wider bg-transparent text-white hover:bg-white/10 transition-all duration-200" style={{ borderRadius: 12, border: '2px solid rgba(255,255,255,0.25)' }}>
               Report an Issue
             </a>
@@ -555,7 +561,7 @@ export default function HomeContent() {
                 水
               </div>
               <span className="font-bold font-display uppercase tracking-tight text-accent">ShineiAPI</span>
-              <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.1</span>
+              <span className="text-[10px] text-white/40 font-mono px-2 py-0.5" style={{ borderRadius: 6, border: '1px solid rgba(255,255,255,0.15)' }}>v2.0.2</span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
               <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-white/50 hover:text-accent transition-colors font-bold uppercase tracking-wider">GitHub</a>

@@ -1,6 +1,6 @@
 /*
  * ╔══════════════════════════════════════════════════════╗
- * ║  SHINEIAPI v2.0.1                                    ║
+ * ║  SHINEIAPI v2.0.2                                    ║
  * ║  Browse series endpoint — GET /api/v1/series         ║
  * ║  github.com/Shineii86/ShineiAPI                      ║
  * ╚══════════════════════════════════════════════════════╝
@@ -115,7 +115,7 @@ export async function GET(request) {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'User-Agent': 'ShineiAPI/2.0.1 (github.com/Shineii86/ShineiAPI)',
+          'User-Agent': 'ShineiAPI/2.0.2 (github.com/Shineii86/ShineiAPI)',
         },
         signal: controller.signal,
       });

@@ -493,6 +493,13 @@ export default function BrowseContent() {
   const [genres, setGenres] = useState([]);
   const [featured, setFeatured] = useState(null);
 
+  const [popPage, setPopPage] = useState(1);
+  const [trendPage, setTrendPage] = useState(1);
+  const [popLoading, setPopLoading] = useState(false);
+  const [trendLoading, setTrendLoading] = useState(false);
+  const [popTotal, setPopTotal] = useState(0);
+  const [trendTotal, setTrendTotal] = useState(0);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState(null);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -575,6 +582,38 @@ export default function BrowseContent() {
     }
   }, [searchQuery, handleSearch]);
 
+  /* ─── Load more for Popular ─── */
+  const loadMorePopular = useCallback(async () => {
+    setPopLoading(true);
+    try {
+      const nextPage = popPage + 1;
+      const res = await fetch(`/api/v1/popular?page=${nextPage}`);
+      const json = await res.json();
+      if (json.success && json.data.length > 0) {
+        setPopular(prev => [...prev, ...json.data]);
+        setPopPage(nextPage);
+        setPopTotal(json.pagination?.total || 0);
+      }
+    } catch {}
+    finally { setPopLoading(false); }
+  }, [popPage]);
+
+  /* ─── Load more for Trending ─── */
+  const loadMoreTrending = useCallback(async () => {
+    setTrendLoading(true);
+    try {
+      const nextPage = trendPage + 1;
+      const res = await fetch(`/api/v1/popular?type=trending&page=${nextPage}`);
+      const json = await res.json();
+      if (json.success && json.data.length > 0) {
+        setTrending(prev => [...prev, ...json.data]);
+        setTrendPage(nextPage);
+        setTrendTotal(json.pagination?.total || 0);
+      }
+    } catch {}
+    finally { setTrendLoading(false); }
+  }, [trendPage]);
+
   const isSearching = searchQuery.length >= 2;
 
   return (
@@ -592,10 +631,14 @@ export default function BrowseContent() {
           </Link>
           <div className="hidden sm:flex items-center gap-1">
             <Link href="/browse" className="text-sm font-semibold text-primary bg-accent/80 px-3 py-1.5 transition-all duration-200" style={{ borderRadius: 10 }}>Browse</Link>
+            <Link href="/browse/genres" className="text-sm font-semibold text-primary/70 hover:text-primary hover:bg-black/5 px-3 py-1.5 transition-all duration-200" style={{ borderRadius: 10 }}>Genres</Link>
             <Link href="/docs" className="text-sm font-semibold text-primary/70 hover:text-primary hover:bg-black/5 px-3 py-1.5 transition-all duration-200" style={{ borderRadius: 10 }}>Docs</Link>
             <a href="https://github.com/Shineii86/ShineiAPI" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-primary/70 hover:text-primary hover:bg-black/5 px-3 py-1.5 transition-all duration-200 flex items-center gap-1.5" style={{ borderRadius: 10 }}>
               <IconGithub size={15} /> GitHub
             </a>
+            <Link href="/" className="text-sm font-semibold text-primary/70 hover:text-primary hover:bg-black/5 px-3 py-1.5 transition-all duration-200" style={{ borderRadius: 10 }}>
+              Home
+            </Link>
           </div>
         </div>
       </nav>
@@ -771,13 +814,32 @@ export default function BrowseContent() {
                 {Array.from({ length: 12 }).map((_, i) => <CardSkeleton key={i} />)}
               </div>
             ) : (
-              <ScrollRow>
-                {popular.map((s, i) => (
-                  <div key={s.id || s.slug} className="w-40 sm:w-44 shrink-0 snap-start">
-                    <SeriesCard series={s} onClick={setSelectedSeries} index={i} />
-                  </div>
-                ))}
-              </ScrollRow>
+              <>
+                <ScrollRow>
+                  {popular.map((s, i) => (
+                    <div key={s.id || s.slug} className="w-40 sm:w-44 shrink-0 snap-start">
+                      <SeriesCard series={s} onClick={setSelectedSeries} index={i} />
+                    </div>
+                  ))}
+                  {(popPage * 25 < popTotal || popular.length >= 25 * popPage) && (
+                    <div className="w-40 sm:w-44 shrink-0 snap-start flex items-center justify-center">
+                      <button
+                        onClick={loadMorePopular}
+                        disabled={popLoading}
+                        className="w-full aspect-[3/4] flex flex-col items-center justify-center gap-2 bg-primary/5 rounded-2xl border border-primary/8 hover:bg-accent/15 hover:border-primary/15 transition-all text-primary/50 hover:text-primary"
+                      >
+                        {popLoading ? (
+                          <div className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                        ) : (
+                          <>
+                            <span className="text-xs font-bold uppercase tracking-wider">Load More</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </ScrollRow>
+              </>
             )}
           </div>
         </section>
@@ -805,6 +867,21 @@ export default function BrowseContent() {
                     <SeriesCard series={s} onClick={setSelectedSeries} index={i} />
                   </div>
                 ))}
+                {(trendPage * 25 < trendTotal || trending.length >= 25 * trendPage) && (
+                  <div className="w-40 sm:w-44 shrink-0 snap-start flex items-center justify-center">
+                    <button
+                      onClick={loadMoreTrending}
+                      disabled={trendLoading}
+                      className="w-full aspect-[3/4] flex flex-col items-center justify-center gap-2 bg-primary/5 rounded-2xl border border-primary/8 hover:bg-accent/15 hover:border-primary/15 transition-all text-primary/50 hover:text-primary"
+                    >
+                      {trendLoading ? (
+                        <div className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+                      ) : (
+                        <span className="text-xs font-bold uppercase tracking-wider">Load More</span>
+                      )}
+                    </button>
+                  </div>
+                )}
               </ScrollRow>
             )}
           </div>
