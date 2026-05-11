@@ -1373,7 +1373,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 <div align="center">
 
-**Built with ❤️ by [Shineii86](https://github.com/Shineii86)**
+**Built with ❤️ by [Shinei Nouzen](https://github.com/Shineii86)**
 
 <br />
 
