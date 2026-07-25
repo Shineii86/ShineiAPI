@@ -1,10 +1,9 @@
+> [!NOTE]
+> **API MAYBE Temporarily Paused** due to suspiciously too many requests. My hosted version of this API is only for testing purposes. You MUST host your own instance to use the API.
+
 <div align="center">
 
 <img src="public/cover.jpg" alt="ShineiAPI — Free Manga & Manhwa REST API" width="100%" />
-
-<br />
-
-# 水 ShineiAPI
 
 ### The Fastest Free Manga API Built on Toraka
 
@@ -1371,18 +1370,59 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
+## 📄 License
+
 <div align="center">
 
-**Built with ❤️ by [Shinei Nouzen](https://github.com/Shineii86)**
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge&logo=mit&logoColor=white)](./LICENSE)
 
-<br />
+This project is licensed under the **MIT License**.
 
-<a href="https://github.com/Shineii86/ShineiAPI/stargazers">⭐ Star this repo</a> ·
-<a href="https://github.com/Shineii86/ShineiAPI/fork">🍴 Fork it</a> ·
-<a href="https://github.com/Shineii86/ShineiAPI/issues/new">🐛 Report issue</a>
+Free to use, modify, and distribute — see the [LICENSE](LICENSE) file for details.
 
-<br />
+</div>
 
-<img src="https://api.star-history.com/svg?repos=Shineii86/ShineiAPI&type=Date" alt="Star History Chart" width="600" />
+---
 
+## 👤 Author
+
+<div align="center">
+
+  <a href="https://github.com/Shineii86">
+  <img src="https://github.com/AniWaifuBot/Waifus/blob/main/Source/Banner.png" alt="Banner" width="100%" />
+  </a>
+  
+</div>
+  
+<p align="center">
+  <b style="font-size: 5.5em;">Shinei Nouzen</b>
+  <br/>
+  <sub>Full-Stack Developer & Anime Enthusiast</sub>
+  <br/><br/>
+  <a href="https://github.com/Shineii86"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
+  <a href="https://telegram.me/Shineii86"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"/></a>
+  <a href="https://instagram.com/ikx7.a"><img src="https://img.shields.io/badge/Instagram-C13584?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/></a>
+  <a href="mailto:ikx7a@hotmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
+</p>
+
+---
+
+## ⭐ Star History
+
+<p align="center">
+  <a href="https://star-history.com/#Shineii86/ShineiAPI&Date">
+    <img src="https://api.star-history.com/svg?repos=Shineii86/ShineiAPI&type=Date" alt="Star History Chart" width="100%"/>
+  </a>
+</p>
+
+> ⭐ If you found this project useful, please consider giving it a star!
+
+---
+
+<div align="center">
+  <p align="center">
+    <b>Made With ❤️ For The Manhwa Community</b>
+    <br/><br/>
+    <sub>© Shinei Nouzen. All Rights Reserved.</sub>
+  </p>
 </div>
